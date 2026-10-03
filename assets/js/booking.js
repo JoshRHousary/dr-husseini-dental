@@ -334,6 +334,25 @@ document.addEventListener("dh:langchange", (e) => {
   renderAll(e.detail.lang, e.detail.dict);
 });
 
+/* dh:teethlayout — the teeth are built once and reused, and the two layouts
+   build different buttons, so crossing 900px (rotation, a resized window) has
+   to throw the cached set away and build again. */
+(function watchTeethLayout() {
+  if (!window.matchMedia) return;
+  const mq = window.matchMedia("(max-width: 900px)");
+  const rebuild = () => {
+    const container = document.getElementById("dateTeeth");
+    if (!container) return;
+    dateTeethButtons = [];
+    container.innerHTML = "";
+    const state = window.DH_STATE || {};
+    if (state.dict) renderAll(state.lang, state.dict);
+    document.dispatchEvent(new CustomEvent("dh:teethlayout"));
+  };
+  if (mq.addEventListener) mq.addEventListener("change", rebuild);
+  else if (mq.addListener) mq.addListener(rebuild);
+})();
+
 document.addEventListener("DOMContentLoaded", async () => {
   const prevBtn = document.getElementById("prevMonth");
   const nextBtn = document.getElementById("nextMonth");

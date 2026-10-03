@@ -16,6 +16,45 @@
 (function () {
   const MIN_TEETH = 31;   // a long month
 
+  /* DH_TEETH_GRID — the mobile layout.
+
+     The arches only work where the stage is the page. Below 900px the stage is
+     a banner, so the teeth leave it and become an ordinary 7-column calendar
+     that still reads as teeth: same buttons, same order, same state classes. */
+  const MOBILE = "(max-width: 900px)";
+  function isGrid() {
+    return !!(window.matchMedia && window.matchMedia(MOBILE).matches);
+  }
+
+  /* Move the container between the stage and the in-flow mount. */
+  function placeContainer(container, grid) {
+    const mount = document.getElementById("teethMount");
+    const stage = document.getElementById("mouthStage");
+    const window_ = document.getElementById("mouthWindow");
+    if (grid) {
+      if (mount && container.parentNode !== mount) mount.appendChild(container);
+    } else if (stage && container.parentNode !== stage) {
+      // back onto the arches, before the scrolling window it sits under
+      if (window_) stage.insertBefore(container, window_);
+      else stage.appendChild(container);
+    }
+  }
+
+  /* The weekday header, rebuilt on every paint so it follows the language. */
+  function renderDows(container, dict, grid) {
+    let head = document.getElementById("dateTeethDows");
+    if (!grid) { if (head) head.remove(); return; }
+    if (!head) {
+      head = document.createElement("div");
+      head.id = "dateTeethDows";
+      head.className = "dt-dows";
+      head.setAttribute("aria-hidden", "true");
+      container.parentNode.insertBefore(head, container);
+    }
+    head.innerHTML = dict.booking.weekdaysShort
+      .map(d => "<span>" + d + "</span>").join("");
+  }
+
   function teethMap() {
     const t = window.DH_TEETH;
     if (!Array.isArray(t) || t.length < MIN_TEETH) {
@@ -29,11 +68,25 @@
   function buildTeeth(container) {
     const map = teethMap();
     if (!map) return [];
+    const grid = isGrid();
+    container.classList.toggle("dt-grid", grid);
+    container.dataset.layout = grid ? "grid" : "stage";
+    placeContainer(container, grid);
     container.innerHTML = "";
     return map.map((t, i) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "date-tooth date-tooth-" + t.arch;
+      if (grid) {
+        // flow layout: the cells are sized by the grid, all labels full size
+        btn.dataset.toothIndex = String(i);
+        btn.dataset.ltrLeft = String(t.left);
+        btn.dataset.ltrWidth = String(t.width);
+        btn.dataset.size = "md";
+        btn.innerHTML = '<span class="dt-dow"></span><span class="dt-num"></span>';
+        container.appendChild(btn);
+        return btn;
+      }
       btn.style.left = t.left + "%";
       btn.style.top = t.top + "%";
       btn.style.width = t.width + "%";
@@ -76,6 +129,17 @@
 
     const container = buttons.length ? buttons[0].parentNode : null;
     if (container) container.classList.toggle("has-selection", selectedDay != null);
+
+    const grid = container && container.dataset.layout === "grid";
+    if (container) {
+      renderDows(container, dict, grid);
+      container.setAttribute("aria-label", dict.booking.selectDate);
+    }
+    // One column start, on day 1: every later day flows after it, so the whole
+    // month lands under the right weekday without a single spacer element.
+    if (grid && buttons[0]) {
+      buttons[0].style.gridColumnStart = String(new Date(year, month, 1).getDay() + 1);
+    }
 
     buttons.forEach((btn, i) => {
       const day = i + 1;
@@ -210,5 +274,5 @@
     });
   }
 
-  window.DH_BOOKING_TEETH = { buildTeeth, paintMonth, playConfirmSequence };
+  window.DH_BOOKING_TEETH = { buildTeeth, paintMonth, playConfirmSequence, isGrid };
 })();

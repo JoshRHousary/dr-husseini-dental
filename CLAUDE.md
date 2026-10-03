@@ -156,3 +156,105 @@ Chrome's native-messaging host is failing (`-101`), so the extension can't drive
 
 ### Preview artefact
 `preview/mobile-mouth-stage.html` measures whether the desktop mouth stage could work in portrait. Scaling to fit screen *width* gives 9–19px teeth at 2.3px labels (unusable); scaling to fill screen *height* gives 34–75px × 62px teeth at ~9px (viable, but only the central third of the mouth is visible). Decision was to keep the banner approach. **Keep this file out of the deploy; delete once recorded.**
+
+## Session 2026-10-02 — the booking page becomes the mouth (reconstructed)
+
+This session was never written down at the time; what follows is read back from
+the files it left behind (`tools/patch-booking-*.mjs`, `tools/*teeth*`,
+`assets/media/tool-*`), so treat it as a record of the code, not of the intent.
+
+- **The teeth are the calendar.** `booking.html` no longer puts the menu on the
+  upper teeth: the menu moved to the palate (`.palate-nav`), EN/AR/FR sit above
+  the uvula (`.palate-langs`), the page text and form sit on the tongue
+  (`.mouth-window.tongue-window`), and all 32 teeth carry the dates
+  (`#dateTeeth`, rendered by `assets/js/booking-teeth.js`). Day N goes on tooth
+  N — 32 teeth against a 28-31 day month, with the wisdom teeth spare.
+- **The tooth map is measured, not guessed.** `tools/build-teeth-map.py` locates
+  each crown in `mouth-open.jpg` and writes `assets/data/teeth.json`;
+  `tools/build-teeth-js.mjs` inlines it as `teeth-data.js` because the site has
+  to open from `file://`, where `fetch` is blocked. Label size follows each
+  cell's real width (`data-size`), and the back molars tilt toward the arch.
+- **The confirmation sequence.** On confirm: the chosen tooth shines, the shine
+  ripples out to the whole arch, the mouth closes into a smile and reopens —
+  `mouth-close-smile.mp4` / `mouth-smile-open.mp4`, both Higgsfield (Kling v3.0)
+  from the same stills as the intro, `preload="none"` so only a patient who
+  books pays for them. Capped at 7s and never on the error path: the WhatsApp
+  hand-off is never gated on the animation.
+- **Instrument assets.** The hand-drawn SVG drill was replaced by Higgsfield
+  renders cropped and background-removed to `tool-drill/mirror/probe/scaler.webp`
+  (14-27KB each), per the brief's "motion via Higgsfield".
+
+**What it missed:** every one of those rules is desktop-only, and the mobile
+rule was not applied. See below.
+
+## Session 2026-10-03 — mobile parity for the calendar, and the repo
+
+### The booking calendar was broken on phones (fixed)
+Verified in Chromium at 390x844 — the first time any of this has been seen in a
+real browser. The 32 date teeth are positioned with inline `left/top/width/
+height` percentages of the stage, and **inline styles beat every media query**,
+so on a phone (where the stage is a 42vh banner) the cells measured **13-34px
+wide** and floated as pink bars over the month stepper and the form card. The
+page was unusable, which is the page that converts.
+
+`tools/patch-booking-mobile.mjs` gives the calendar a second layout instead of
+trying to shrink the first:
+- **>=901px** — absolute on the arches, exactly as built on 10-02.
+- **<=900px** — the teeth leave the stage for `#teethMount` in normal flow and
+  become a 7-column weekday grid, 48px minimum cells, still tooth-shaped. The
+  palate menu and language pills hide (the header nav covers both).
+- The same 32 buttons in the same day order, so the click handlers, `paintMonth`
+  and the confirm sequence are untouched. Weekday alignment is one
+  `grid-column-start` on day 1; everything flows after it.
+- Crossing 900px (rotation, a resized window) throws the cached buttons away and
+  rebuilds — the two layouts build different buttons.
+
+### Page-local grids never actually collapsed (fixed)
+`.booking-layout`, `.contact-grid` and `.service-list` are declared in each
+page's own `<style>`, and the mobile overrides in `style.css` matched them at the
+**same specificity**. The page's `<style>` is parsed later, so it won on order
+and all three stayed multi-column at 390px — the order twin of the specificity
+bug from 10-01, and the 10-01 fix added the breakpoints without the weight. They
+now carry a `body` prefix (`tools/patch-grid-order.mjs`).
+
+**New gate rule** (`tools/patch-check-grid-order.mjs`): a page-local grid whose
+only mobile override sits in `style.css` at equal-or-lower specificity is now an
+**error**, not a warning. Negative-tested — reverting `body .booking-layout`
+makes the gate fail with the explanation.
+
+### Also fixed
+- Dead CSS removed: the 7-column grid calendar the date teeth replaced
+  (`.weekday-row`, `.days-grid`, `.tooth-*`, `.weekday-cell`) was still styled in
+  `booking.html` and still being sized by a mobile block in `style.css`.
+- Tap targets: `.learn-more` (76x22) and the contact page's `tel:`/WhatsApp
+  values (24px) were under the 44px minimum on phones; both now 44px.
+- The weekday no longer repeats inside all 31 grid cells — the column header
+  carries it. On the arches the tooth keeps it, because there is no header there.
+- `booking.selectDate` is now used (the grid's `aria-label`) and is on the gate's
+  JS-keys list, so the unused-key warning is gone.
+
+### Verified in Chromium (the 10-01 "unverified by eye" item)
+index / about / services / booking / contact / blog at **1440x900, 390x844 and
+320x760**, plus Arabic (RTL) on home, booking, services and contact. No console
+errors, no failed requests, no horizontal overflow on any of them, and every
+interactive element now clears 40px on mobile. Screenshots in `preview/verify/`
+(not deployed). Note the language key is `dh_lang`, not `dh-lang`.
+
+### Repo + deployment (2026-10-03)
+- The folder is now a git repo (`main`), first commit is the whole site.
+- `.github/workflows/pages.yml` runs `check-site.mjs` and `validate-posts.mjs`,
+  rebuilds the feeds, then deploys to GitHub Pages — a failing gate blocks the
+  deploy. It also runs **daily**, because posts go live by date and the feeds
+  have to catch up.
+- `.gitignore` keeps the 72MB screen recording, `preview/` and `_attic/` out.
+- `_attic/media/` holds everything unreferenced that was in `assets/media/`:
+  the duplicate loader encodes, the HEVC alternate, `loader-1080-alt.mp4` (the
+  take still awaiting a pick) and the full-size instrument/mouth sources. The
+  deployed tree is 24MB.
+- `tools/set-domain.mjs` now accepts a base path, so a GitHub Pages project URL
+  (`https://user.github.io/repo`) works as well as a real domain;
+  `build-feeds.mjs` reads the base back out of `robots.txt` the same way.
+- **Open:** `gh auth login` has not been run, so nothing is pushed yet. After
+  auth: create the repo, push, enable Pages, then
+  `node tools/set-domain.mjs https://<user>.github.io/<repo>` and
+  `node tools/build-feeds.mjs`.

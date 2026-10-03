@@ -615,27 +615,30 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
 
 /* ── Page-local grids ──
    Grids declared in a page's own <style> block, which had no breakpoint at all
-   until 2026-10-01. Keep new ones in step with this list. */
+   until 2026-10-01. Keep new ones in step with this list.
+
+   Every one of these carries a `body` prefix on purpose. The page's <style>
+   block is parsed after this file, so at equal specificity the page's
+   multi-column rule wins on order and the breakpoint does nothing — which is
+   exactly what happened between 2026-10-01 and 2026-10-03. tools/check-site.mjs
+   now fails the build if a page-local grid is only matched at equal weight. */
 @media (max-width: 900px) {
-  .booking-layout { grid-template-columns: 1fr; gap: 24px; }
+  body .booking-layout { grid-template-columns: 1fr; gap: 24px; }
   .calendar-wrap { padding: 20px 14px; }
   .booking-side { padding: 22px 18px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  body .contact-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (max-width: 680px) {
   .service-block { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
   body[dir="rtl"] .service-block { grid-template-columns: 1fr; }
-  .service-list { grid-template-columns: 1fr; gap: 10px; }
+  body .service-list { grid-template-columns: 1fr; gap: 10px; }
 }
 
-/* ── Booking calendar tap targets ──
-   Seven columns at 360px with the desktop 8px gaps gave ~37px cells, under the
-   44px minimum. */
+/* ── Booking tap targets ──
+   The 7-column grid calendar these sized was replaced by the date teeth on
+   2026-10-02; what is left is the controls around them. The teeth's own mobile
+   sizing lives in the BOOKING: THE CALENDAR ON A PHONE block. */
 @media (max-width: 900px) {
-  .weekday-row, .days-grid { gap: 4px; }
-  .days-grid { padding: 14px 6px 10px; }
-  .tooth-cell { aspect-ratio: auto; min-height: 44px; font-size: 14px; }
-  .weekday-cell { font-size: 13px; }
   .time-chip { padding: 12px 16px; min-height: 44px; }
   .calendar-nav-btn { width: 44px; height: 44px; }
 }
@@ -1057,4 +1060,93 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
   .mouth-stage.labels-in .palate-nav a,
   .mouth-stage.labels-in .palate-langs button,
   .mouth-stage.labels-in .date-tooth { transition: none; transition-delay: 0s; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ── BOOKING: THE CALENDAR ON A PHONE ──
+   The teeth are the calendar only where the stage is the page. Under 900px the
+   stage is a banner, so the teeth leave it (booking-teeth.js moves them to
+   #teethMount) and lay out as a 7-column month grid — still tooth-shaped, but
+   at a size a thumb can hit. Every rule carries body.page-booking so it outranks
+   the top-level stage rules it has to undo.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* the palate menu and language pills are unreadable in a banner; the header
+     nav and its own language switch cover both */
+  body.page-booking .palate-nav,
+  body.page-booking .palate-langs { display: none; }
+
+  body.page-booking .date-teeth.dt-grid {
+    position: static;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    pointer-events: auto;
+    margin: 0 0 1.4em;
+  }
+  body.page-booking .dt-dows {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 0 0 6px;
+  }
+  body.page-booking .dt-dows span {
+    text-align: center;
+    font: 700 13px/1 var(--font-body);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    opacity: .68;
+  }
+
+  body.page-booking .date-teeth.dt-grid .date-tooth {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 48px;          /* above the 44px tap minimum */
+    gap: 2px;
+    padding: 6px 2px;
+    background: rgba(255, 252, 245, .92);
+    border: 1px solid rgba(122, 38, 33, .16);
+    /* a crown: square shoulders, rounded biting edge */
+    border-radius: 34% 34% 46% 46% / 20% 20% 34% 34%;
+    transform: none;
+    box-shadow: none;
+  }
+  /* The weekday is already the column header here, so repeating it in all 31
+     cells is noise; on the arches there is no header, which is why the tooth
+     carries it there. */
+  body.page-booking .date-teeth.dt-grid .date-tooth .dt-dow { display: none; }
+  body.page-booking .date-teeth.dt-grid .date-tooth .dt-num { font-size: 16px; }
+
+  body.page-booking .date-teeth.dt-grid .date-tooth.dt-today {
+    box-shadow: inset 0 0 0 2px #B23F38;
+  }
+  body.page-booking .date-teeth.dt-grid .date-tooth.dt-selected {
+    background: #FFFFFF;
+    color: #5E1C18;
+    border-color: rgba(122, 38, 33, .5);
+    box-shadow: 0 0 0 2px rgba(178, 63, 56, .9), 0 6px 18px rgba(122, 38, 33, .22);
+    transform: none;           /* a scaled cell would break the grid rhythm */
+  }
+  body.page-booking .date-teeth.dt-grid .date-tooth.dt-past,
+  body.page-booking .date-teeth.dt-grid .date-tooth.dt-full {
+    background: rgba(240, 232, 226, .6);
+    border-color: transparent;
+  }
+  /* the pick flare scales the cell on desktop; in a grid it just jitters */
+  body.page-booking .date-teeth.dt-grid .date-tooth.dt-pick { animation: none; }
+}
+
+/* ── Tap targets missed by the 2026-10-01 sweep ──
+   Measured in Chromium at 390px: both sit at 22-24px, half the 44px minimum.
+   They are inline links inside running text, so they get the height without
+   becoming blocks. */
+@media (max-width: 900px) {
+  a.learn-more,
+  .info-row a.value {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }

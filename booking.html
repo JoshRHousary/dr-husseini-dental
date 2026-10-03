@@ -49,24 +49,8 @@
     font-family: var(--font-display); font-size: 21px; color: var(--primary-dark);
     padding: 8px 22px; border-radius: 999px; background: var(--accent-soft);
   }
-  .weekday-row, .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-  .weekday-row { margin-bottom: 10px; }
-  .weekday-cell { text-align: center; font-size: 11.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
-  .days-grid {
-    padding: 20px 10px 12px;
-    background: linear-gradient(180deg, var(--accent-soft) 0%, rgba(255,227,220,0) 55%);
-    border-radius: 20px 20px 46px 46px;
-  }
-  .tooth-cell {
-    aspect-ratio: 3/4; border-radius: 8px 8px 16px 16px; background: var(--enamel);
-    border: 1px solid var(--line); font-weight: 600; font-size: 13.5px; color: var(--ink);
-    cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s, color .2s;
-  }
-  .tooth-cell:hover:not(.tooth-disabled):not(.tooth-empty) { transform: translateY(-3px); box-shadow: 0 10px 20px -12px rgba(10,62,58,.4); }
-  .tooth-empty { visibility: hidden; cursor: default; border: none; background: none; }
-  .tooth-disabled { opacity: .28; cursor: not-allowed; }
-  .tooth-today { border-color: var(--primary); border-width: 2px; }
-  .tooth-selected { background: var(--primary); color: #fff; border-color: var(--primary-dark); }
+  /* The 7-column grid calendar that used to live here was replaced by the
+     32 date teeth (assets/js/booking-teeth.js) on 2026-10-02. */
 
   .time-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
   .time-chip { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--enamel); font-size: 13.5px; font-weight: 600; cursor: pointer; }
@@ -194,6 +178,9 @@
         <button type="button" id="nextMonth" class="calendar-nav-btn" aria-label="Next month">&#8594;</button>
       </div>
       <p class="pick-hint" data-i18n="booking.pickOnTeeth">Pick a date on the teeth.</p>
+      <!-- Under 900px the teeth move out of the stage and into here as a
+           7-column grid; on desktop this stays empty. -->
+      <div id="teethMount"></div>
 
       <div class="booking-side">
         <h3 data-i18n="booking.selectTime">Select a time</h3>
