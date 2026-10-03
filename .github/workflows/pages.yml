@@ -1,0 +1,57 @@
+# Gate, then publish to GitHub Pages.
+#
+# tools/check-site.mjs is the standing gate (i18n keys, head tags, local
+# references, mobile breakpoints, selector specificity); tools/validate-posts.mjs
+# gates the blog entries. A failing gate blocks the deploy rather than shipping
+# a broken page.
+#
+# Posts go live by date, so the feeds are rebuilt on every run and by the daily
+# schedule below — otherwise a Wednesday post is missing from sitemap.xml and
+# feed.xml until the next push.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 4 * * *"   # daily, so date-gated posts reach the feeds
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check the site
+        run: node tools/check-site.mjs
+      - name: Validate blog posts
+        run: node tools/validate-posts.mjs
+      - name: Rebuild sitemap + feed
+        run: node tools/build-feeds.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - run: echo "gate passed"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

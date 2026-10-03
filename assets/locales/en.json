@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "dir": "ltr",
+    "name": "English"
+  },
+  "common": {
+    "brand": "Dr. Jihad S. Husseini",
+    "brandSub": "Cosmetic · Endodontic · Implant Dentistry",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "booking": "Booking",
+      "blog": "Blog",
+      "contact": "Contact",
+      "menu": "Menu"
+    },
+    "whatsapp": "Book on WhatsApp",
+    "callClinic": "Call Clinic",
+    "callMobile": "Call Mobile",
+    "footer": {
+      "tagline": "Cosmetic, endodontic, and implant dentistry — precise, calm, and built around your smile.",
+      "explore": "Explore",
+      "contact": "Contact",
+      "hours": "Hours",
+      "hoursPlaceholder": "[Add clinic hours]",
+      "addressPlaceholder": "[Add clinic address]",
+      "rights": "All rights reserved."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Cosmetic · Endodontic · Implant Dentistry",
+      "title": "A smile built with precision, care, and craft.",
+      "lead": "Dr. Jihad S. Husseini brings cosmetic dentistry, root canal (endodontic) treatment, and dental implants together under one calm, precise practice.",
+      "ctaPrimary": "Book on WhatsApp",
+      "ctaSecondary": "View Treatments",
+      "chip1": "Cosmetic Dentistry",
+      "chip2": "Endodontics",
+      "chip3": "Prosthetic & Implants"
+    },
+    "services": {
+      "eyebrow": "Treatments",
+      "title": "Care built around three specialties",
+      "lead": "Every treatment plan is built around precision diagnostics and a calm, unhurried chairside manner.",
+      "card1Title": "Cosmetic Dentistry",
+      "card1Body": "Veneers, whitening, and smile design tailored to how you want to look and feel.",
+      "card2Title": "Endodontics",
+      "card2Body": "Root canal treatment done with precision instruments and a focus on comfort.",
+      "card3Title": "Prosthetic & Implant Dentistry",
+      "card3Body": "Implants, crowns, and bridges that restore function without compromising your smile.",
+      "learnMore": "Learn more"
+    },
+    "about": {
+      "eyebrow": "About Dr. Husseini",
+      "title": "A precise hand, a calm chair.",
+      "body": "[Add Dr. Husseini's bio: education, credentials, years in practice, and treatment philosophy.]",
+      "cta": "Read the full story"
+    },
+    "trust": {
+      "title": "Why patients choose this practice",
+      "point1": "Three specialties under one roof — no referrals, no delays.",
+      "point2": "Modern diagnostics and a precision-first approach to every treatment.",
+      "point3": "A calm, unhurried practice built around your comfort."
+    },
+    "testimonials": {
+      "eyebrow": "Patient stories",
+      "title": "[Placeholder — replace with real patient reviews before launch]",
+      "note": "Add verified Google reviews or direct patient testimonials here."
+    },
+    "cta": {
+      "title": "Ready to book your visit?",
+      "body": "Message the clinic on WhatsApp for the fastest response, or call to book directly.",
+      "whatsapp": "Book on WhatsApp",
+      "call": "Call 01/308206"
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Treatments",
+      "title": "Three specialties, one precise practice.",
+      "lead": "From a single chipped tooth to a full smile transformation — every treatment starts with a careful diagnosis and an honest conversation about your options."
+    },
+    "cosmetic": {
+      "tag": "01",
+      "title": "Cosmetic Dentistry",
+      "intro": "Treatments focused on how your smile looks and feels, without compromising the health of your teeth.",
+      "item1": "Porcelain veneers",
+      "item2": "Professional teeth whitening",
+      "item3": "Smile design & digital mock-ups",
+      "item4": "Bonding & minor contouring",
+      "cta": "Ask about cosmetic dentistry"
+    },
+    "endodontics": {
+      "tag": "02",
+      "title": "Endodontics",
+      "intro": "Root canal treatment aimed at saving the natural tooth, performed with precision instruments and a focus on comfort.",
+      "item1": "Root canal treatment (single & multi-visit)",
+      "item2": "Retreatment of previous root canals",
+      "item3": "Management of dental trauma",
+      "item4": "Pain diagnosis & emergency care",
+      "cta": "Ask about root canal treatment"
+    },
+    "implants": {
+      "tag": "03",
+      "title": "Prosthetic & Implant Dentistry",
+      "intro": "Restoring missing or damaged teeth with implants, crowns, and bridges built for long-term function.",
+      "item1": "Dental implants (single tooth & full arch)",
+      "item2": "Crowns & bridges",
+      "item3": "Full & partial dentures",
+      "item4": "Implant-supported restorations",
+      "cta": "Ask about implants"
+    },
+    "cta": {
+      "title": "Not sure which treatment you need?",
+      "body": "Message the clinic on WhatsApp and describe what's going on — Dr. Husseini's team will point you in the right direction.",
+      "whatsapp": "Book on WhatsApp"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About Dr. Husseini",
+      "title": "A precise hand, a calm chair.",
+      "lead": "[Add a short introductory line about Dr. Husseini's approach to dentistry.]"
+    },
+    "bio": {
+      "title": "Background",
+      "body": "[Add Dr. Husseini's full bio here: dental school, university, graduation year, postgraduate training/certifications in cosmetic dentistry, endodontics, and implantology, and any professional memberships.]"
+    },
+    "philosophy": {
+      "title": "Treatment philosophy",
+      "body": "[Add a paragraph in Dr. Husseini's own words about how he approaches diagnosis, patient comfort, and treatment planning.]"
+    },
+    "credentials": {
+      "title": "Credentials & training",
+      "item1": "[Add degree / dental school]",
+      "item2": "[Add postgraduate certification]",
+      "item3": "[Add professional membership / association]"
+    },
+    "trust": {
+      "title": "Why patients choose this practice",
+      "point1": "Three specialties under one roof — no referrals, no delays.",
+      "point2": "Modern diagnostics and a precision-first approach to every treatment.",
+      "point3": "A calm, unhurried practice built around your comfort."
+    },
+    "cta": {
+      "title": "Ready to meet Dr. Husseini?",
+      "body": "Message the clinic on WhatsApp to ask a question or book your first visit.",
+      "whatsapp": "Book on WhatsApp"
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Let's talk about your smile.",
+      "lead": "The fastest way to reach the clinic is WhatsApp. You can also call directly or send a message below."
+    },
+    "info": {
+      "title": "Clinic details",
+      "clinicPhoneLabel": "Clinic",
+      "mobilePhoneLabel": "Mobile",
+      "whatsappLabel": "WhatsApp",
+      "addressLabel": "Address",
+      "addressPlaceholder": "[Add clinic address]",
+      "hoursLabel": "Hours",
+      "hoursPlaceholder": "[Add clinic hours]",
+      "mapPlaceholder": "[Embed clinic map once address is confirmed]"
+    },
+    "form": {
+      "title": "Send a message",
+      "name": "Full name",
+      "phone": "Phone number",
+      "message": "How can we help?",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "errName": "Please enter your name.",
+      "errPhone": "Please enter a phone number we can reach you on.",
+      "errMessage": "Please write your message.",
+      "errSendFallback": "We couldn't send that. Try WhatsApp instead and we'll get straight back to you.",
+      "openWhatsapp": "Send on WhatsApp instead",
+      "viaWhatsapp": "Your message opens in WhatsApp so you have a copy of it too."
+    }
+  },
+  "booking": {
+    "hero": {
+      "eyebrow": "Booking",
+      "title": "Pick a day. We'll confirm on WhatsApp.",
+      "lead": "Tap a date on the calendar, choose a time that works, and leave us your name and number — we'll confirm your visit on WhatsApp. No waiting on hold."
+    },
+    "calendarPrefix": "Mouth of",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdaysShort": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "selectDate": "Select a date",
+    "selectTime": "Select a time",
+    "confirmWhatsapp": "Confirm on WhatsApp",
+    "prefersCall": "Prefer to call instead?",
+    "yourDetails": "Your details",
+    "fieldName": "Full name",
+    "fieldPhone": "Phone / WhatsApp",
+    "fieldService": "Treatment",
+    "fieldNotes": "Anything we should know? (optional)",
+    "servicePrompt": "Not sure yet",
+    "services": {
+      "cosmetic": "Cosmetic dentistry",
+      "endodontic": "Endodontics (root canal)",
+      "implant": "Implants & prosthetics",
+      "checkup": "Check-up or cleaning",
+      "other": "Something else"
+    },
+    "slotTaken": "Already booked",
+    "dayFull": "Fully booked",
+    "saving": "Holding your slot…",
+    "errName": "Please enter your name.",
+    "errPhone": "Please enter a phone number we can reach you on.",
+    "errSlot": "Please pick a day and a time.",
+    "errSlotGone": "Sorry — that time was just taken. Please pick another.",
+    "errSaveFallback": "We couldn't save your request. Message us on WhatsApp and we'll book you in.",
+    "openWhatsappAnyway": "Open WhatsApp anyway",
+    "noteRequestOnly": "This is a request, not a confirmation — the clinic confirms the exact time on WhatsApp.",
+    "noteLiveAvailability": "Times already taken are greyed out. Your slot is held as soon as you confirm, and the clinic confirms on WhatsApp.",
+    "noteAvailabilityOffline": "We can't check live availability right now, so every time is shown as free. The clinic will confirm the exact time on WhatsApp.",
+    "pickOnTeeth": "Pick a date on the teeth.",
+    "datePast": "This date has passed"
+  },
+  "blog": {
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Dental topics, explained simply.",
+      "lead": "New posts every Monday, Wednesday, and Friday. Written for patients, not textbooks."
+    },
+    "empty": "No posts published yet — check back Monday, Wednesday, or Friday for the next one.",
+    "readMore": "Read more",
+    "sourceLabel": "Reference:",
+    "backToBlog": "Back to all posts"
+  }
+}

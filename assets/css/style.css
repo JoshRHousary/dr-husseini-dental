@@ -1,0 +1,1060 @@
+/* ============================================
+   Dr. Jihad S. Husseini — Dental — Core Styles
+   ============================================ */
+
+:root {
+  --bg: #FBF8F3;
+  --bg-soft: #F3EEE4;
+  --ink: #172420;
+  --ink-soft: #4B5C56;
+  --primary: #0F5C56;
+  --primary-dark: #0A3E3A;
+  --primary-light: #E4F0EE;
+  --accent: #FF6F59;
+  --accent-soft: #FFE3DC;
+  --gold: #C9A227;
+  --enamel: #FFFFFF;
+  --line: #E4DDCF;
+
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Work Sans', 'Segoe UI', sans-serif;
+  --font-display-ar: 'Cairo', 'Tajawal', sans-serif;
+  --font-body-ar: 'Tajawal', 'Segoe UI', sans-serif;
+
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 20px 50px -25px rgba(10, 62, 58, 0.35);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-body-ar);
+}
+
+body[dir="rtl"] { direction: rtl; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 .5em;
+  color: var(--primary-dark);
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4 {
+  font-family: var(--font-display-ar);
+  font-weight: 700;
+}
+
+p { margin: 0 0 1em; color: var(--ink-soft); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s, color .3s;
+}
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-2px); }
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--enamel);
+  box-shadow: var(--shadow-soft);
+}
+.btn-primary:hover { background: var(--primary-dark); }
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 16px 34px -16px rgba(37, 211, 102, .65);
+}
+.btn-whatsapp:hover { background: #1EBE59; }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+.btn-outline:hover { background: var(--primary-light); }
+
+/* The intro used to be a full-viewport overlay that handed over to the stage.
+   Those were different boxes — a cover-cropped viewport versus a letterboxed
+   stage — so the mouth popped and shifted by up to 9% at the swap. The video now
+   lives inside .mouth-stage instead; see "THE INTRO IS THE STAGE" below. */
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 90px 0 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero h1 { font-size: clamp(34px, 4.6vw, 58px); }
+.hero p.lead { font-size: 18px; max-width: 46ch; }
+.hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.hero-trust {
+  display: flex;
+  gap: 26px;
+  margin-top: 42px;
+  flex-wrap: wrap;
+}
+.hero-trust .stat b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--primary-dark);
+}
+.hero-trust .stat span { font-size: 12.5px; color: var(--ink-soft); }
+
+.hero-art {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-art .smile-curve {
+  width: 78%;
+}
+.hero-art .smile-curve path {
+  stroke: var(--enamel);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: drawCurve 1.8s var(--ease) .3s forwards;
+}
+@keyframes drawCurve {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- Sections ---------- */
+section { padding: 88px 0; }
+section.soft { background: var(--bg-soft); }
+.section-head { max-width: 640px; margin-bottom: 48px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+
+.card {
+  background: var(--enamel);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+@media (hover: hover) {
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-soft); }
+}
+.card .icon {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.card h3 { font-size: 19px; margin-bottom: 8px; }
+.card p { font-size: 14.5px; margin-bottom: 0; }
+.card .learn-more {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.testimonial-row { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
+.testimonial {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  background: var(--enamel);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  border: 1px solid var(--line);
+}
+.testimonial .stars { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+.testimonial p { font-size: 14.5px; }
+.testimonial .who { font-weight: 700; color: var(--ink); font-size: 13.5px; }
+
+.cta-band {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  color: var(--enamel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.cta-band h2 { color: var(--enamel); margin-bottom: 6px; }
+.cta-band p { color: rgba(255,255,255,.78); margin-bottom: 0; }
+
+/* ---------- Footer ---------- */
+footer.site-footer {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,.72);
+  padding: 64px 0 28px;
+  margin-top: 60px;
+}
+footer.site-footer h4 { color: #fff; font-size: 15px; }
+footer.site-footer a { color: rgba(255,255,255,.72); font-size: 14px; }
+footer.site-footer a:hover { color: #fff; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-bottom {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  font-size: 12.5px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  /* .mouth-window-prefixed variants included so these are not outranked by the
+     base rules at the top of the "FIT INSIDE THE MOUTH" section — every page's
+     content sits inside .mouth-window. */
+  .hero-grid, .grid-2,
+  .mouth-window .hero-grid, .mouth-window .grid-2 { grid-template-columns: 1fr; }
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid, .mouth-window .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  .grid-3, .grid-4,
+  .mouth-window .grid-3, .mouth-window .grid-4 { grid-template-columns: 1fr; }
+  .cta-band, .mouth-window .cta-band { flex-direction: column; text-align: center; }
+  .footer-grid, .mouth-window .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+/* The old scroll-zoom home hero (.mouth-hero / .mouth-scene / .mouth-hero-panel
+   / .hero-after / .mouth-scroll-cue) was removed on 2026-10-01: index.html was
+   rewritten to the #mouthStage + #mouthWindow model and that markup no longer
+   exists in any page, so ~60 lines of CSS and initMouthHero() were unreachable.
+   The file's only 700px breakpoint went with it. */
+
+/* =====================================================================
+   HOME = INSIDE THE MOUTH. The mouth is a fixed stage; the menu sits on the
+   upper teeth; all page content scrolls inside the mouth opening.
+   Stage geometry is in % of the 1344x752 mouth image so it stays aligned.
+   ===================================================================== */
+body.home-mouth { overflow: hidden; height: 100vh; background: #F6F1E7; }
+.mouth-stage-wrap { position: fixed; inset: 0; display: grid; place-items: center; background: #F6F1E7; }
+.mouth-stage { position: relative; width: min(100vw, calc(100vh * 1.7872)); aspect-ratio: 1344 / 752; }
+.mouth-stage-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+
+/* menu on the teeth */
+.teeth-nav { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.tooth {
+  position: absolute; pointer-events: auto;
+  display: flex; align-items: center; justify-content: center;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font: 600 clamp(9px, .95vw, 13px)/1 var(--font-body);
+  letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  color: var(--primary-dark);
+  border-radius: 40% 40% 48% 48% / 22% 22% 42% 42%;
+  background: rgba(255, 255, 255, 0);
+  transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] {
+  background: rgba(15, 92, 86, .88); color: #fff;
+  box-shadow: 0 6px 18px -6px rgba(10, 62, 58, .55);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* content window inside the cavity */
+.mouth-window {
+  position: absolute; z-index: 2;
+  left: 28.3%; right: 28.3%; top: 22.6%; bottom: 24.7%;
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(15,92,86,.4) transparent;
+  background: rgba(251, 248, 243, .93);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-radius: 22px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 18px 44px -18px rgba(60, 10, 10, .55);
+  font-size: clamp(12px, 1.02vw, 16px);
+}
+.mouth-window .container { width: 100%; max-width: none; padding: 0 clamp(14px, 1.9vw, 26px); }
+.mouth-window section { padding: clamp(22px, 3vw, 40px) 0; }
+.mouth-window .window-hero { padding: clamp(20px, 2.6vw, 34px) clamp(14px, 1.9vw, 26px) clamp(14px, 2vw, 24px); text-align: center; }
+.mouth-window h1 { font-size: clamp(22px, 2.5vw, 36px); margin: 4px 0 8px; }
+.mouth-window h2 { font-size: clamp(18px, 1.9vw, 27px); }
+.mouth-window h3 { font-size: clamp(15px, 1.35vw, 19px); }
+.mouth-window p, .mouth-window li { font-size: 1em; }
+.mouth-window .lead { font-size: 1.05em; margin: 0 auto; max-width: 46ch; }
+.mouth-window .hero-cta-row { justify-content: center; margin-top: 14px; }
+.mouth-window .hero-trust { justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+.mouth-window .grid-3, .mouth-window .grid-2 { grid-template-columns: 1fr; gap: 14px; }
+.mouth-window .section-head { margin-bottom: 20px; }
+.mouth-window .cta-band { padding: 22px; flex-direction: column; text-align: center; gap: 14px; }
+.mouth-window .footer-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+.mouth-window .hero-art { display: none; }
+
+/* header on home: only brand + language switch float over the cream margins (menu is on the teeth) */
+body.home-mouth .site-header { position: fixed; left: 0; right: 0; top: 0; background: transparent; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none; }
+body.home-mouth .site-header .brand, body.home-mouth .site-header .lang-switch { pointer-events: auto; }
+body.home-mouth .primary-nav, body.home-mouth .nav-actions > .btn, body.home-mouth .nav-toggle { display: none; }
+
+/* small screens: no room for a mouth-shaped window, so the mouth becomes a banner and the page flows normally */
+@media (max-width: 900px) {
+  body.home-mouth { overflow: auto; height: auto; }
+  .mouth-stage-wrap { position: static; display: block; }
+  .mouth-stage { width: 100%; aspect-ratio: auto; }
+  .mouth-stage-img { position: static; height: 42vh; object-fit: cover; object-position: 50% 45%; }
+  .teeth-nav { display: none; }
+  .mouth-window { position: relative; left: auto; right: auto; top: auto; bottom: auto; overflow: visible; margin: -36px 12px 0; font-size: 15px; }
+  body.home-mouth .site-header { position: sticky; background: rgba(251,248,243,.92); pointer-events: auto; border-bottom: 1px solid var(--line); }
+  body.home-mouth .primary-nav { display: flex; }
+  body.home-mouth .nav-actions > .btn { display: none; }
+  body.home-mouth .nav-toggle { display: inline-flex; }
+}
+
+
+/* ---- menu shrunk to sit on the teeth inside the mouth ---- */
+.tooth { font-size: clamp(8px, .78vw, 11px); letter-spacing: .1em; border-radius: 38% 38% 46% 46% / 20% 20% 40% 40%; }
+.tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] { transform: none; box-shadow: none; background: rgba(15, 92, 86, .9); color: #fff; }
+.lang-teeth { position: absolute; inset: 0; z-index: 3; pointer-events: none; display: block; background: none; padding: 0; }
+.lang-teeth button {
+  position: absolute; pointer-events: auto; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; padding: 0; background: transparent;
+  font: 700 clamp(8px, .78vw, 11px)/1 var(--font-body); letter-spacing: .08em; color: var(--primary-dark);
+  border-radius: 40% 40% 48% 48% / 20% 20% 44% 44%;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.lang-teeth button:hover, .lang-teeth button.active { background: rgba(15, 92, 86, .9); color: #fff; }
+body.home-mouth .site-header .lang-switch { display: none; }
+@media (max-width: 900px) {
+  .lang-teeth { display: none; }
+  body.home-mouth .site-header .lang-switch { display: flex; }
+}
+
+
+/* =====================================================================
+   FIT INSIDE THE MOUTH (desktop). Content sits directly on the mouth (no panel
+   background), colours come from the mouth palette, sizes scale with the stage,
+   tooth labels are horizontal. Applies to every page.
+   ===================================================================== */
+.mouth-stage { container-type: inline-size; }
+
+@media (min-width: 901px) {
+  /* tooth labels: horizontal, scaled with the stage, mouth-red highlight */
+  .tooth {
+    writing-mode: horizontal-tb; text-orientation: mixed;
+    font-size: .6cqw; font-weight: 700; letter-spacing: 0; text-transform: none; white-space: nowrap;
+    color: #7A2621;
+    border-radius: 40% 40% 46% 46% / 22% 22% 40% 40%;
+  }
+  .tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] { background: #B23F38; color: #FFF7F0; }
+  .lang-teeth button { font-size: .6cqw; color: #7A2621; }
+  .lang-teeth button:hover, .lang-teeth button.active { background: #B23F38; color: #FFF7F0; }
+
+  /* window: smaller rect that sits inside the cavity, no background */
+  .mouth-window {
+    left: 33.2%; right: 33%; top: 24%; bottom: 25.5%;
+    background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border-radius: 0;
+    font-size: clamp(9px, 1.02cqw, 19px);
+    -webkit-mask-image: linear-gradient(transparent 0, #000 5%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(transparent 0, #000 5%, #000 94%, transparent 100%);
+    scrollbar-color: rgba(255, 240, 232, .45) transparent;
+    /* palette re-mapped onto the mouth */
+    --ink: #FFF7F0; --ink-soft: #FBE3DA; --primary: #FFF7F0; --primary-dark: #FFF7F0; --primary-light: rgba(255, 247, 240, .16);
+    --accent: #FFD3BD; --accent-soft: rgba(255, 247, 240, .14); --line: rgba(255, 240, 232, .38); --bg: transparent; --bg-soft: transparent;
+    --enamel: #FFF7F0;
+    color: var(--ink);
+    text-shadow: 0 1px 7px rgba(84, 14, 18, .6);
+  }
+  .mouth-window h1 { font-size: 2.3em; }
+  .mouth-window h2 { font-size: 1.7em; }
+  .mouth-window h3 { font-size: 1.22em; }
+  .mouth-window .container { padding: 0 1.6em; }
+  .mouth-window section, .mouth-window section.soft { background: transparent; padding: 2.4em 0; }
+  .mouth-window .window-hero { padding: 1.6em 1.6em 1em; }
+  .mouth-window .eyebrow { font-size: .72em; }
+  .mouth-window .lead { font-size: 1em; }
+  .mouth-window .btn { font-size: .95em; padding: .7em 1.3em; text-shadow: none; }
+  .mouth-window .btn-outline { border-color: rgba(255, 247, 240, .85); color: #FFF7F0; background: transparent; }
+  .mouth-window .btn-outline:hover { background: rgba(255, 247, 240, .18); }
+  .mouth-window .btn-primary { background: #FFF7F0; color: #8E2F2A; border-color: #FFF7F0; }
+  .mouth-window .card, .mouth-window .cta-band, .mouth-window .post-card { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+  .mouth-window .card .icon { background: rgba(255, 247, 240, .16); color: #FFF7F0; }
+  .mouth-window .cta-band h2, .mouth-window .cta-band p { color: #FFF7F0; }
+  .mouth-window .stat span, .mouth-window .learn-more, .mouth-window a:not(.btn) { color: #FFF7F0; }
+  .mouth-window input, .mouth-window textarea, .mouth-window select { text-shadow: none; color: #172420; }
+  .mouth-window footer.site-footer { background: transparent; color: #FFF7F0; border-top: 1px solid var(--line); }
+  .mouth-window footer.site-footer h4, .mouth-window footer.site-footer a, .mouth-window footer.site-footer p, .mouth-window footer.site-footer li, .mouth-window footer.site-footer span { color: #FFF7F0; }
+}
+
+/* ---- panels/cards become subtle glass on the mouth (desktop) ---- */
+@media (min-width: 901px) {
+  .mouth-window { --enamel: rgba(255, 247, 240, .10); --shadow-soft: none; }
+  .mouth-window .tooth-selected { background: #B23F38; color: #FFF7F0; border-color: #FFF7F0; }
+  .mouth-window .time-chip { color: #FFF7F0; }
+  .mouth-window .time-chip-selected { background: #FFF7F0; color: #7A2621; border-color: #FFF7F0; }
+  .mouth-window .calendar-nav-btn { background: rgba(255, 247, 240, .14); color: #FFF7F0; }
+  .mouth-window #monthLabel { background: rgba(255, 247, 240, .16); color: #FFF7F0; }
+  .mouth-window .days-grid { background: none; }
+  .mouth-window .booking-layout, .mouth-window .contact-grid { grid-template-columns: 1fr; gap: 1.4em; }
+  .mouth-window .calendar-wrap, .mouth-window .booking-side, .mouth-window .contact-form { padding: 1.2em; }
+  .mouth-window .map-placeholder { background: rgba(255, 247, 240, .10); color: #FFF7F0; border-color: var(--line); }
+  .mouth-window .testimonial { background: rgba(255, 247, 240, .10); }
+  .mouth-window .testimonial .who { color: #FFF7F0; }
+  .mouth-window .service-tag, .mouth-window .dot { color: #FFF7F0; }
+}
+
+/* ---- legibility + narrow canine teeth ---- */
+@media (min-width: 901px) {
+  .teeth-nav .tooth:first-child, .teeth-nav .tooth:last-child { font-size: .5cqw; }
+  .mouth-window { text-shadow: 0 1px 2px rgba(84, 14, 18, .75), 0 0 12px rgba(84, 14, 18, .5); }
+  .mouth-window .btn, .mouth-window input, .mouth-window textarea, .mouth-window select { text-shadow: none; }
+  .mouth-window .label, .mouth-window .info-row .label { color: #FFE9DE; }
+}
+
+
+/* ── RTL (Arabic) ─────────────────────────────────────────────────────────────
+   body[dir="rtl"] and the Arabic font stack are set near the top of this file;
+   these are the directional details that the direction property alone misses.
+   The tooth nav's x positions are mirrored in JS (applyTeethDirection). */
+
+/* Vertical tooth labels read bottom-to-top in LTR; in RTL the mirrored column
+   should still read the same way, so the rotation is unchanged — but the text
+   inside each label needs its own direction or Arabic renders reversed. */
+body[dir="rtl"] .tooth,
+body[dir="rtl"] .lang-teeth button { direction: rtl; unicode-bidi: isolate; }
+
+/* Anything laid out with an explicit edge rather than a logical property. */
+body[dir="rtl"] .brand small { text-align: right; }
+body[dir="rtl"] .nav-row { flex-direction: row-reverse; }
+body[dir="rtl"] .primary-nav { flex-direction: row-reverse; }
+body[dir="rtl"] .nav-actions { flex-direction: row-reverse; }
+body[dir="rtl"] .footer-grid ul { padding-right: 0; }
+body[dir="rtl"] .learn-more { direction: rtl; }
+
+/* The booking form: labels, inputs and the calendar header all flip. */
+body[dir="rtl"] .field input,
+body[dir="rtl"] .field select,
+body[dir="rtl"] .field textarea { text-align: right; }
+body[dir="rtl"] .calendar-head { flex-direction: row-reverse; }
+body[dir="rtl"] .weekday-row,
+body[dir="rtl"] .days-grid { direction: rtl; }
+
+/* Latin strings inside Arabic text (phone numbers, times, EN/AR/FR) need
+   isolating or the digits and punctuation reorder around them. */
+body[dir="rtl"] a[href^="tel:"],
+body[dir="rtl"] .time-chip,
+body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
+
+/* Visible to screen readers only — used where a visual label would be redundant. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ── MOBILE (<= 900px) ──
+
+   Desktop (>= 901px) puts the whole page inside the mouth; mobile drops the
+   stage, shows the mouth as a banner and reverts to normal flow. They are two
+   layouts, so every edit has to land in both.
+
+   SPECIFICITY: a desktop rule prefixed `body.home-mouth` or `.mouth-window`
+   outranks a bare responsive selector regardless of the media query. Mobile
+   rules here must match or exceed the specificity of what they override —
+   tools/check-site.mjs enforces this.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Horizontal overflow backstop ──
+   The header used to push the page ~315px sideways at 390px. The drawer below
+   fixes the cause; this makes any future overflow non-destructive. */
+@media (max-width: 900px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+}
+
+/* ── Navigation drawer ──
+   .nav-toggle exists in the markup as of 2026-10-01; before that it was styled
+   but never built, so initMobileNav() was a permanent no-op and the six-link
+   desktop nav stayed on screen at every width. */
+@media (max-width: 900px) {
+  /* 0,2,1 — matches body.home-mouth .primary-nav so it actually wins */
+  body.home-mouth .nav-toggle,
+  .site-header .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; flex: none;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--enamel); cursor: pointer; padding: 0;
+  }
+  .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after {
+    content: ""; display: block; width: 18px; height: 2px;
+    background: var(--primary-dark); border-radius: 2px;
+    transition: transform .25s var(--ease), opacity .2s linear;
+  }
+  .nav-toggle-bars { position: relative; }
+  .nav-toggle-bars::before { position: absolute; top: -6px; }
+  .nav-toggle-bars::after  { position: absolute; top: 6px; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars { background: transparent; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars::before { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars::after  { transform: translateY(-6px) rotate(-45deg); }
+
+  /* collapse the inline row into a drawer. 0,2,1 to beat line ~505's
+     body.home-mouth .primary-nav { display: flex } */
+  body.home-mouth .primary-nav,
+  .site-header .primary-nav {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    box-shadow: 0 18px 40px -24px rgba(10,62,58,.45);
+    padding: 8px 16px 14px;
+  }
+  body.home-mouth .primary-nav.nav-open,
+  .site-header .primary-nav.nav-open { display: flex; }
+
+  nav.primary-nav a {
+    display: flex; align-items: center; min-height: 48px;
+    font-size: 16px; padding: 6px 2px;
+    border-bottom: 1px solid var(--line);
+  }
+  nav.primary-nav a:last-child { border-bottom: 0; }
+  /* the sliding underline reads as a stray line in a vertical list */
+  nav.primary-nav a::after { display: none; }
+  nav.primary-nav a[aria-current="page"] { color: var(--primary); font-weight: 700; }
+
+  .site-header .nav-row { position: relative; gap: 10px; padding: 10px 0; }
+  .nav-actions { gap: 8px; }
+
+  /* the language switch is the control that used to sit off-screen entirely */
+  .lang-switch button { min-width: 44px; min-height: 44px; font-size: 14px; padding: 6px 8px; }
+
+  /* 11px uppercase under a 20px brand is unreadable on a phone */
+  .brand { font-size: 17px; }
+  .brand small { font-size: 13px; letter-spacing: .06em; }
+}
+
+/* ── Footer ──
+   .mouth-window .footer-grid (0,2,0) outranks the <=680px .footer-grid (0,1,0),
+   so the footer stayed two columns at 390px. Matched specificity here. */
+@media (max-width: 680px) {
+  .mouth-window .footer-grid,
+  .footer-grid { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 900px) {
+  footer.site-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+  .footer-bottom { font-size: 13px; }
+}
+
+/* ── Page-local grids ──
+   Grids declared in a page's own <style> block, which had no breakpoint at all
+   until 2026-10-01. Keep new ones in step with this list. */
+@media (max-width: 900px) {
+  .booking-layout { grid-template-columns: 1fr; gap: 24px; }
+  .calendar-wrap { padding: 20px 14px; }
+  .booking-side { padding: 22px 18px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 680px) {
+  .service-block { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+  body[dir="rtl"] .service-block { grid-template-columns: 1fr; }
+  .service-list { grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* ── Booking calendar tap targets ──
+   Seven columns at 360px with the desktop 8px gaps gave ~37px cells, under the
+   44px minimum. */
+@media (max-width: 900px) {
+  .weekday-row, .days-grid { gap: 4px; }
+  .days-grid { padding: 14px 6px 10px; }
+  .tooth-cell { aspect-ratio: auto; min-height: 44px; font-size: 14px; }
+  .weekday-cell { font-size: 13px; }
+  .time-chip { padding: 12px 16px; min-height: 44px; }
+  .calendar-nav-btn { width: 44px; height: 44px; }
+}
+
+/* ── Form fields ──
+   iOS Safari zooms the whole page when a focused input is under 16px, and the
+   layout does not reliably recover. */
+@media (max-width: 900px) {
+  .field input, .field select, .field textarea,
+  form.contact-form input, form.contact-form textarea {
+    font-size: 16px; padding: 12px 14px;
+  }
+  .field textarea, form.contact-form textarea { min-height: 96px; }
+  #confirmBtn, #fallbackWhatsapp, #contactFallback,
+  form.contact-form button[type="submit"] { min-height: 48px; }
+  /* booking.html sets padding:10px inline on these, giving ~38px */
+  .booking-side a[href^="tel:"] { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}
+
+/* ── Sticky WhatsApp CTA ──
+   ~195x48px fixed bottom-right, about half the screen width at 390px, with no
+   compensating page padding — it covered the booking page's own Confirm button
+   (the same action), the tel: buttons and the copyright line. */
+@media (max-width: 900px) {
+  .whatsapp-float { bottom: 14px; right: 14px; padding: 12px 16px; font-size: 14px; }
+  body[dir="rtl"] .whatsapp-float { right: auto; left: 14px; }
+  /* clear the float so it never sits on top of real content */
+  .site-footer .footer-bottom { padding-bottom: 72px; }
+  /* on the booking page the float duplicates #confirmBtn, so drop it there */
+  body.page-booking .whatsapp-float { display: none; }
+}
+
+/* The intro on mobile is the same clip, the same frames and the same timing as
+   desktop — the mouth-stage-video rules handle its framing, matching
+   .mouth-stage-img exactly at this breakpoint. */
+
+/* ── RTL on mobile ──
+   The desktop RTL rules flip rows that only exist on desktop. On mobile it is
+   the sticky header's own nav and language switch that need flipping.
+   NOTE: an earlier blanket `body[dir="rtl"] .mouth-window { text-align: right }`
+   outranked the centred blocks and flattened them — hence the explicit
+   re-assertions below. */
+@media (max-width: 900px) {
+  body[dir="rtl"] .site-header .nav-row { flex-direction: row-reverse; }
+  body[dir="rtl"] .site-header .lang-switch { flex-direction: row-reverse; }
+  body[dir="rtl"] .primary-nav { align-items: stretch; }
+  body[dir="rtl"] nav.primary-nav a { text-align: right; justify-content: flex-end; }
+
+  body[dir="rtl"] .mouth-window { text-align: right; }
+  /* 0,3,0+ so these survive the line above */
+  body[dir="rtl"] .mouth-window .window-hero,
+  body[dir="rtl"] .mouth-window .section-head.center,
+  body[dir="rtl"] .mouth-window .cta-band,
+  body[dir="rtl"] .mouth-window .hero { text-align: center; }
+}
+
+/* ── Mouth banner trim ──
+   The window keeps a 12px inset and a 22px radius on mobile, which left a faint
+   off-tone frame and let the dark footer's square corners poke out. */
+@media (max-width: 900px) {
+  .mouth-window { font-size: 15px; }
+  .mouth-window .site-footer { margin-left: -12px; margin-right: -12px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ── DENTAL DRILL ──
+   The handpiece is assets/media/tool-drill.webp, generated with Higgsfield and
+   cut out with its background remover. One node is injected into .mouth-stage by
+   assets/js/drill.js and moved to whichever tooth is active.
+
+   Sized in cqw against .mouth-stage (container-type: inline-size), so the drill
+   scales with the mouth rather than the viewport.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.drill {
+  position: absolute;
+  z-index: 4;                      /* above .teeth-nav (3), below the header */
+  width: 3.6cqw;
+  pointer-events: none;
+  opacity: 0;
+  /* anchored at the burr tip, so it pivots about the point that touches enamel */
+  transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) translateY(-42%) rotate(-9deg);
+  filter: drop-shadow(0 .5cqw .7cqw rgba(10, 62, 58, .5));
+}
+.drill-img { display: block; width: 100%; height: auto; }
+
+/* the bite mark where the burr meets the tooth */
+.drill-spark {
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: .9cqw; height: .9cqw;
+  margin-left: -.45cqw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,236,210,.6) 45%, transparent 70%);
+  opacity: 0;
+}
+
+@media (min-width: 901px) {
+  .drill.drill-run { animation: drillIn .40s cubic-bezier(.3,.9,.3,1) forwards; }
+  /* the handpiece chatters once it is in contact */
+  .drill.drill-run .drill-img { animation: drillBite .07s linear .34s infinite; }
+  .drill.drill-run .drill-spark { animation: drillSpark .34s ease-out .36s infinite; }
+}
+
+@keyframes drillIn {
+  0%   { opacity: 0; transform: translate(-50%, -100%) translateY(-120%) rotate(-18deg); }
+  60%  { opacity: 1; transform: translate(-50%, -100%) translateY(-6%)   rotate(-4deg); }
+  78%  { transform: translate(-50%, -100%) translateY(3%) rotate(-1deg); }
+  100% { opacity: 1; transform: translate(-50%, -100%) translateY(0%)   rotate(-2deg); }
+}
+@keyframes drillBite {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(.9px); }
+}
+@keyframes drillSpark {
+  0%   { opacity: 0; transform: scale(.4); }
+  30%  { opacity: .9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5) translateY(.3cqw); }
+}
+
+/* the tooth being worked on */
+.tooth.tooth-drilled { background: #B23F38; color: #FFF7F0; }
+
+/* ── mobile: no teeth on screen, so the drawer link does the work ── */
+.link-drilling { position: relative; color: var(--primary) !important; }
+.link-drilling::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 6px;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: linkDrill .46s cubic-bezier(.3,.9,.3,1) forwards;
+}
+@keyframes linkDrill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drill { display: none; }
+  .link-drilling::before { animation: none; transform: scaleX(1); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ── BOOKING: THE MOUTH IS THE CALENDAR ──
+   The teeth stop being navigation and carry the dates; the menu moves to the
+   palate; the page's text sits on the tongue. Desktop only — under 900px there
+   is no stage, so the page keeps its ordinary layout (see the MOBILE block).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── the menu, on the palate ── */
+.palate-nav { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.palate-nav a {
+  position: absolute;
+  pointer-events: auto;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; text-decoration: none; white-space: nowrap;
+  font: 700 .62cqw/1 var(--font-body);
+  letter-spacing: .02em;
+  color: #FFF2EC;
+  background: rgba(122, 38, 33, .32);
+  border: 1px solid rgba(255, 236, 228, .28);
+  border-radius: 999px;
+  text-shadow: 0 1px 4px rgba(84, 14, 18, .75);
+  transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.palate-nav a:hover,
+.palate-nav a:focus-visible,
+.palate-nav a[aria-current="page"] {
+  background: rgba(255, 244, 238, .92);
+  color: #7A2621;
+  text-shadow: none;
+  transform: translateY(-1px);
+}
+
+/* ── EN / AR / FR, just above the uvula ── */
+.palate-langs {
+  position: absolute; inset: 0; z-index: 3;
+  pointer-events: none; display: block;
+  background: none; padding: 0; border-radius: 0;
+}
+.palate-langs button {
+  position: absolute;
+  pointer-events: auto; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255, 236, 228, .28);
+  padding: 0;
+  background: rgba(122, 38, 33, .32);
+  font: 700 .58cqw/1 var(--font-body);
+  letter-spacing: .06em;
+  color: #FFF2EC;
+  border-radius: 999px;
+  text-shadow: 0 1px 4px rgba(84, 14, 18, .75);
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.palate-langs button:hover,
+.palate-langs button.active {
+  background: rgba(255, 244, 238, .92);
+  color: #7A2621;
+  text-shadow: none;
+}
+
+/* ── the dates, on all 32 teeth ── */
+.date-teeth { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.date-tooth {
+  position: absolute;
+  pointer-events: auto; cursor: pointer;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .1cqw;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 38% 38% 46% 46% / 20% 20% 40% 40%;
+  color: #7A2621;
+  font-family: var(--font-body);
+  line-height: 1;
+  transition: background .2s var(--ease), color .2s var(--ease),
+              transform .2s var(--ease), box-shadow .3s var(--ease);
+}
+.date-tooth .dt-dow {
+  font-size: .38cqw; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; opacity: .72;
+}
+.date-tooth .dt-num { font-size: .62cqw; font-weight: 700; }
+
+/* Label size follows the cell's measured width rather than a guessed child
+   index. data-size is set from the tooth map when the buttons are built.
+   The previous :nth-child ranges stripped the weekday symbol from twelve teeth. */
+.date-tooth[data-size="sm"] .dt-num { font-size: .52cqw; }
+.date-tooth[data-size="sm"] .dt-dow { font-size: .3cqw; letter-spacing: 0; }
+.date-tooth[data-size="xs"] .dt-num { font-size: .44cqw; }
+.date-tooth[data-size="xs"] .dt-dow { display: none; }   /* genuinely no room */
+
+/* Back molars recede at an angle; a horizontal label reads as sliding off the
+   crown, so each one tilts toward the arch. The sign flips across the midline. */
+.date-tooth[data-tilt] { transform: rotate(var(--tilt, 0deg)); }
+.date-tooth[data-tilt].dt-selected { transform: rotate(var(--tilt, 0deg)) scale(1.06); }
+
+.date-tooth:hover:not(:disabled),
+.date-tooth:focus-visible { background: rgba(255, 252, 245, .55); color: #5E1C18; }
+.date-tooth.dt-today { box-shadow: inset 0 0 0 .14cqw #B23F38; }
+
+/* THE SELECTED TOOTH SHINES BRIGHTER THAN THE OTHERS.
+   Bright enamel with a warm halo — not a dark fill. The spec is comparative
+   ("brighter than the others"), so the rest of the arch dims to make it read. */
+.date-tooth.dt-selected {
+  background: #FFFFFF;
+  color: #5E1C18;
+  box-shadow: 0 0 1.5cqw .32cqw rgba(255, 246, 225, .95),
+              0 0 .5cqw .1cqw rgba(255, 255, 255, 1);
+  transform: scale(1.06);
+  z-index: 2;
+}
+.date-teeth.has-selection .date-tooth:not(.dt-selected):not(.dt-shine) {
+  opacity: .55;
+  filter: saturate(.85);
+}
+.date-tooth.dt-past { opacity: .28; cursor: not-allowed; }
+.date-tooth.dt-full { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+.date-tooth[hidden] { display: none; }
+
+/* the moment of choosing: a brief flare, then it settles into the lit state */
+.date-tooth.dt-pick { animation: toothPick .5s cubic-bezier(.3,.9,.3,1); }
+@keyframes toothPick {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  45%  { transform: scale(1.22); box-shadow: 0 0 2.6cqw .7cqw rgba(255,255,255,.95); }
+  100% { transform: scale(1.06); box-shadow: 0 0 1.5cqw .32cqw rgba(255,246,225,.95); }
+}
+
+/* ── the booking text, on the tongue ── */
+@media (min-width: 901px) {
+  body.page-booking .mouth-window.tongue-window {
+    left: 39%; right: 39%; top: 52%; bottom: 25%;
+    /* the tongue is busier than the cavity, so the text needs a little lift */
+    text-shadow: 0 1px 6px rgba(84, 14, 18, .85), 0 0 2px rgba(84, 14, 18, .6);
+  }
+  body.page-booking .mouth-window.tongue-window::-webkit-scrollbar { width: 0; }
+
+  /* the stepper replaces the old calendar header */
+  .month-stepper {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: .6em; margin-bottom: .5em;
+  }
+  .month-stepper #monthLabel {
+    font-family: var(--font-display);
+    font-size: 1.15em; text-align: center; flex: 1;
+  }
+  .pick-hint { text-align: center; font-size: .82em; opacity: .85; margin: 0 0 1em; }
+}
+
+/* ── the confirmation: the teeth shine, then the mouth smiles ── */
+.date-teeth .date-tooth.dt-shine {
+  animation: toothShine .62s ease-out var(--shine-delay, 0ms) both;
+  opacity: 1;
+}
+.date-tooth.dt-shine-strong {
+  animation: toothShineStrong .5s ease-out both;
+  z-index: 1;
+}
+@keyframes toothShine {
+  0%   { background: transparent; box-shadow: none; }
+  40%  { background: rgba(255, 252, 245, .95); color: #7A2621;
+         box-shadow: 0 0 1.6cqw .3cqw rgba(255, 246, 230, .9); }
+  100% { background: transparent; box-shadow: none; }
+}
+@keyframes toothShineStrong {
+  0%   { background: #B23F38; }
+  35%  { background: #FFFFFF; color: #7A2621;
+         box-shadow: 0 0 2.6cqw .6cqw rgba(255, 255, 255, .95);
+         transform: scale(1.14); }
+  100% { background: #FFFFFF; color: #7A2621;
+         box-shadow: 0 0 1.6cqw .3cqw rgba(255, 250, 240, .8);
+         transform: scale(1.04); }
+}
+
+/* the whole arch lifts a touch while every tooth is lit */
+.mouth-stage.teeth-shine-all .mouth-stage-img { filter: brightness(1.06) saturate(1.03); }
+
+/* ── the close -> smile -> reopen clips ── */
+.smile-sequence {
+  position: fixed; inset: 0; z-index: 9000;
+  background: #F6F1E7;
+  opacity: 0;
+  transition: opacity .3s linear;
+  pointer-events: none;
+}
+.smile-sequence.seq-close,
+.smile-sequence.seq-hold,
+.smile-sequence.seq-open { opacity: 1; }
+.smile-clip, .smile-still {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .25s linear;
+}
+.smile-sequence.seq-close #smileClose { opacity: 1; }
+.smile-sequence.seq-hold  #smileStill { opacity: 1; }
+.smile-sequence.seq-open  #smileOpen  { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .date-tooth.dt-shine, .date-tooth.dt-shine-strong, .date-tooth.dt-pick { animation: none; }
+  /* the chosen tooth still reads as chosen, just without the motion */
+  .date-tooth.dt-selected { transform: none; }
+  .smile-sequence { display: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ── THE INTRO IS THE STAGE ──
+   The clip sits in the same box as .mouth-stage-img, pixel for pixel, so there
+   is no hand-over and nothing can shift. It plays, holds on its last frame, then
+   cross-fades to the still underneath at identical geometry.
+
+   Both elements must resolve their box the SAME way at every breakpoint — that
+   identity is the entire fix, so keep them in step.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mouth-stage-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;              /* stage aspect == source aspect, so no distortion */
+  display: block;
+  z-index: 1;                    /* over the still, under .teeth-nav (3) */
+  opacity: 1;
+  transition: opacity .5s linear;
+  pointer-events: none;
+}
+/* matches .mouth-stage-img exactly at this breakpoint */
+@media (max-width: 900px) {
+  .mouth-stage-video { object-fit: cover; object-position: 50% 45%; }
+}
+.mouth-stage-video.stage-video-done { opacity: 0; }
+
+/* ── the labels arrive once the mouth is open and steady ── */
+@media (min-width: 901px) {
+  .mouth-stage.labels-pending .tooth,
+  .mouth-stage.labels-pending .lang-teeth button,
+  .mouth-stage.labels-pending .palate-nav a,
+  .mouth-stage.labels-pending .palate-langs button,
+  .mouth-stage.labels-pending .date-tooth {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  .mouth-stage.labels-in .tooth,
+  .mouth-stage.labels-in .lang-teeth button,
+  .mouth-stage.labels-in .palate-nav a,
+  .mouth-stage.labels-in .palate-langs button,
+  .mouth-stage.labels-in .date-tooth {
+    opacity: 1;
+    transform: translateY(0);
+    /* slow and warm rather than snapping — the ousmaneballondor note in the brief */
+    transition: opacity .6s var(--ease), transform .6s var(--ease);
+  }
+  /* staggered from the centre outwards, so the smile fills in */
+  .mouth-stage.labels-in .tooth:nth-child(3),
+  .mouth-stage.labels-in .tooth:nth-child(4) { transition-delay: .00s; }
+  .mouth-stage.labels-in .tooth:nth-child(2),
+  .mouth-stage.labels-in .tooth:nth-child(5) { transition-delay: .09s; }
+  .mouth-stage.labels-in .tooth:nth-child(1),
+  .mouth-stage.labels-in .tooth:nth-child(6) { transition-delay: .18s; }
+  .mouth-stage.labels-in .lang-teeth button { transition-delay: .26s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouth-stage-video { display: none; }
+  .mouth-stage.labels-pending .tooth,
+  .mouth-stage.labels-pending .lang-teeth button,
+  .mouth-stage.labels-pending .palate-nav a,
+  .mouth-stage.labels-pending .palate-langs button,
+  .mouth-stage.labels-pending .date-tooth { opacity: 1; transform: none; }
+  .mouth-stage.labels-in .tooth,
+  .mouth-stage.labels-in .lang-teeth button,
+  .mouth-stage.labels-in .palate-nav a,
+  .mouth-stage.labels-in .palate-langs button,
+  .mouth-stage.labels-in .date-tooth { transition: none; transition-delay: 0s; }
+}

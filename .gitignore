@@ -1,0 +1,12 @@
+# Local screen recordings (72MB+), never part of the site
+Recording*.mp4
+
+# Unreferenced source/alternate media, kept locally only
+_attic/
+
+# Local measurement artefacts and the portrait-stage spike
+preview/
+
+node_modules/
+.DS_Store
+Thumbs.db

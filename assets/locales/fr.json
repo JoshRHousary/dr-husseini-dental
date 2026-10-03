@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "dir": "ltr",
+    "name": "Français"
+  },
+  "common": {
+    "brand": "Dr. Jihad S. Husseini",
+    "brandSub": "Dentisterie Esthétique · Endodontie · Implants",
+    "nav": {
+      "home": "Accueil",
+      "about": "À propos",
+      "services": "Soins",
+      "booking": "Rendez-vous",
+      "blog": "Blog",
+      "contact": "Contact",
+      "menu": "Menu"
+    },
+    "whatsapp": "Réserver sur WhatsApp",
+    "callClinic": "Appeler la clinique",
+    "callMobile": "Appeler le mobile",
+    "footer": {
+      "tagline": "Dentisterie esthétique, endodontie et implants — précis, serein, pensés pour votre sourire.",
+      "explore": "Explorer",
+      "contact": "Contact",
+      "hours": "Horaires",
+      "hoursPlaceholder": "[Ajouter les horaires de la clinique]",
+      "addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "rights": "Tous droits réservés."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Dentisterie Esthétique · Endodontie · Implants",
+      "title": "Un sourire façonné avec précision et soin.",
+      "lead": "Le Dr Jihad S. Husseini réunit la dentisterie esthétique, le traitement de canal (endodontie) et les implants dentaires au sein d'une seule pratique, précise et sereine.",
+      "ctaPrimary": "Réserver sur WhatsApp",
+      "ctaSecondary": "Voir les soins",
+      "chip1": "Dentisterie Esthétique",
+      "chip2": "Endodontie",
+      "chip3": "Prothèses & Implants"
+    },
+    "services": {
+      "eyebrow": "Soins",
+      "title": "Des soins bâtis autour de trois spécialités",
+      "lead": "Chaque plan de traitement repose sur un diagnostic précis et une approche calme, sans précipitation.",
+      "card1Title": "Dentisterie Esthétique",
+      "card1Body": "Facettes, blanchiment et conception du sourire adaptés à l'image que vous recherchez.",
+      "card2Title": "Endodontie",
+      "card2Body": "Traitement de canal réalisé avec des instruments de précision, dans le confort.",
+      "card3Title": "Prothèses & Implants",
+      "card3Body": "Implants, couronnes et bridges qui restaurent la fonction sans compromettre votre sourire.",
+      "learnMore": "En savoir plus"
+    },
+    "about": {
+      "eyebrow": "À propos du Dr Husseini",
+      "title": "Une main précise, un fauteuil serein.",
+      "body": "[Ajouter la biographie du Dr Husseini : formation, diplômes, années de pratique et philosophie de soin.]",
+      "cta": "Lire l'histoire complète"
+    },
+    "trust": {
+      "title": "Pourquoi les patients choisissent ce cabinet",
+      "point1": "Trois spécialités réunies — sans renvoi, sans délai.",
+      "point2": "Diagnostics modernes et approche axée sur la précision.",
+      "point3": "Un cabinet calme et serein, pensé pour votre confort."
+    },
+    "testimonials": {
+      "eyebrow": "Témoignages",
+      "title": "[Espace réservé — remplacer par de vrais avis de patients avant le lancement]",
+      "note": "Ajoutez ici des avis Google vérifiés ou des témoignages directs de patients."
+    },
+    "cta": {
+      "title": "Prêt à réserver votre visite ?",
+      "body": "Contactez la clinique sur WhatsApp pour une réponse rapide, ou appelez pour réserver directement.",
+      "whatsapp": "Réserver sur WhatsApp",
+      "call": "Appeler 01/308206"
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Soins",
+      "title": "Trois spécialités, un cabinet précis.",
+      "lead": "D'une simple dent ébréchée à une transformation complète du sourire — chaque traitement commence par un diagnostic minutieux et une conversation honnête sur vos options."
+    },
+    "cosmetic": {
+      "tag": "01",
+      "title": "Dentisterie Esthétique",
+      "intro": "Des soins centrés sur l'apparence et le ressenti de votre sourire, sans compromettre la santé de vos dents.",
+      "item1": "Facettes en porcelaine",
+      "item2": "Blanchiment dentaire professionnel",
+      "item3": "Conception du sourire & maquettes numériques",
+      "item4": "Collage & retouches mineures",
+      "cta": "En savoir plus sur la dentisterie esthétique"
+    },
+    "endodontics": {
+      "tag": "02",
+      "title": "Endodontie",
+      "intro": "Un traitement de canal visant à préserver la dent naturelle, réalisé avec des instruments de précision et le souci du confort.",
+      "item1": "Traitement de canal (une ou plusieurs séances)",
+      "item2": "Retraitement de canaux existants",
+      "item3": "Prise en charge des traumatismes dentaires",
+      "item4": "Diagnostic de la douleur & urgences",
+      "cta": "En savoir plus sur le traitement de canal"
+    },
+    "implants": {
+      "tag": "03",
+      "title": "Prothèses & Implants",
+      "intro": "Restaurer les dents manquantes ou endommagées avec des implants, couronnes et bridges conçus pour durer.",
+      "item1": "Implants dentaires (dent unique & arcade complète)",
+      "item2": "Couronnes & bridges",
+      "item3": "Prothèses complètes & partielles",
+      "item4": "Restaurations sur implants",
+      "cta": "En savoir plus sur les implants"
+    },
+    "cta": {
+      "title": "Vous ne savez pas quel soin vous convient ?",
+      "body": "Contactez la clinique sur WhatsApp et décrivez votre situation — l'équipe du Dr Husseini vous orientera.",
+      "whatsapp": "Réserver sur WhatsApp"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "À propos du Dr Husseini",
+      "title": "Une main précise, un fauteuil serein.",
+      "lead": "[Ajouter une courte phrase d'introduction sur l'approche du Dr Husseini.]"
+    },
+    "bio": {
+      "title": "Parcours",
+      "body": "[Ajouter ici la biographie complète du Dr Husseini : faculté dentaire, université, année de diplôme, formations/certifications en dentisterie esthétique, endodontie et implantologie, et adhésions professionnelles.]"
+    },
+    "philosophy": {
+      "title": "Philosophie de soin",
+      "body": "[Ajouter un paragraphe, dans les mots du Dr Husseini, sur son approche du diagnostic, du confort du patient et de la planification du traitement.]"
+    },
+    "credentials": {
+      "title": "Diplômes & formation",
+      "item1": "[Ajouter le diplôme / la faculté dentaire]",
+      "item2": "[Ajouter une certification de troisième cycle]",
+      "item3": "[Ajouter une adhésion professionnelle / association]"
+    },
+    "trust": {
+      "title": "Pourquoi les patients choisissent ce cabinet",
+      "point1": "Trois spécialités réunies — sans renvoi, sans délai.",
+      "point2": "Diagnostics modernes et approche axée sur la précision.",
+      "point3": "Un cabinet calme et serein, pensé pour votre confort."
+    },
+    "cta": {
+      "title": "Prêt à rencontrer le Dr Husseini ?",
+      "body": "Contactez la clinique sur WhatsApp pour poser une question ou réserver votre première visite.",
+      "whatsapp": "Réserver sur WhatsApp"
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Parlons de votre sourire.",
+      "lead": "Le moyen le plus rapide de joindre la clinique est WhatsApp. Vous pouvez aussi appeler directement ou envoyer un message ci-dessous."
+    },
+    "info": {
+      "title": "Coordonnées de la clinique",
+      "clinicPhoneLabel": "Clinique",
+      "mobilePhoneLabel": "Mobile",
+      "whatsappLabel": "WhatsApp",
+      "addressLabel": "Adresse",
+      "addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "hoursLabel": "Horaires",
+      "hoursPlaceholder": "[Ajouter les horaires de la clinique]",
+      "mapPlaceholder": "[Intégrer la carte de la clinique une fois l'adresse confirmée]"
+    },
+    "form": {
+      "title": "Envoyer un message",
+      "name": "Nom complet",
+      "phone": "Numéro de téléphone",
+      "message": "Comment pouvons-nous vous aider ?",
+      "submit": "Envoyer le message",
+      "sending": "Envoi…",
+      "errName": "Veuillez indiquer votre nom.",
+      "errPhone": "Veuillez indiquer un numéro où nous pouvons vous joindre.",
+      "errMessage": "Veuillez écrire votre message.",
+      "errSendFallback": "Nous n'avons pas pu envoyer ce message. Essayez WhatsApp, nous vous répondrons aussitôt.",
+      "openWhatsapp": "Envoyer via WhatsApp",
+      "viaWhatsapp": "Votre message s'ouvre dans WhatsApp afin que vous en gardiez une copie."
+    }
+  },
+  "booking": {
+    "hero": {
+      "eyebrow": "Rendez-vous",
+      "title": "Choisissez un jour. On confirme sur WhatsApp.",
+      "lead": "Choisissez une date sur le calendrier, l'heure qui vous convient, et laissez-nous votre nom et votre numéro — nous confirmerons votre visite sur WhatsApp. Sans attente au téléphone."
+    },
+    "calendarPrefix": "Mois de",
+    "months": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "weekdaysShort": [
+      "Di",
+      "Lu",
+      "Ma",
+      "Me",
+      "Je",
+      "Ve",
+      "Sa"
+    ],
+    "selectDate": "Choisir une date",
+    "selectTime": "Choisir un horaire",
+    "confirmWhatsapp": "Confirmer sur WhatsApp",
+    "prefersCall": "Vous préférez appeler ?",
+    "yourDetails": "Vos coordonnées",
+    "fieldName": "Nom complet",
+    "fieldPhone": "Téléphone / WhatsApp",
+    "fieldService": "Traitement",
+    "fieldNotes": "Quelque chose à nous signaler ? (facultatif)",
+    "servicePrompt": "Je ne sais pas encore",
+    "services": {
+      "cosmetic": "Dentisterie esthétique",
+      "endodontic": "Endodontie (traitement de canal)",
+      "implant": "Implants et prothèses",
+      "checkup": "Contrôle ou détartrage",
+      "other": "Autre chose"
+    },
+    "slotTaken": "Déjà réservé",
+    "dayFull": "Complet",
+    "saving": "Réservation de votre créneau…",
+    "errName": "Veuillez indiquer votre nom.",
+    "errPhone": "Veuillez indiquer un numéro où nous pouvons vous joindre.",
+    "errSlot": "Veuillez choisir un jour et une heure.",
+    "errSlotGone": "Désolé — ce créneau vient d'être pris. Veuillez en choisir un autre.",
+    "errSaveFallback": "Nous n'avons pas pu enregistrer votre demande. Écrivez-nous sur WhatsApp et nous vous réserverons un créneau.",
+    "openWhatsappAnyway": "Continuer sur WhatsApp",
+    "noteRequestOnly": "Ceci est une demande, pas une confirmation — la clinique confirme l'heure exacte sur WhatsApp.",
+    "noteLiveAvailability": "Les créneaux déjà pris sont grisés. Votre créneau est retenu dès la confirmation, et la clinique confirme sur WhatsApp.",
+    "noteAvailabilityOffline": "Nous ne pouvons pas vérifier les disponibilités pour l'instant, tous les créneaux apparaissent donc libres. La clinique confirmera l'heure exacte sur WhatsApp.",
+    "pickOnTeeth": "Choisissez une date sur les dents.",
+    "datePast": "Cette date est passée"
+  },
+  "blog": {
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Des sujets dentaires, expliqués simplement.",
+      "lead": "Nouveaux articles chaque lundi, mercredi et vendredi. Écrits pour les patients, pas pour les manuels."
+    },
+    "empty": "Aucun article publié pour l'instant — revenez lundi, mercredi ou vendredi pour le prochain.",
+    "readMore": "Lire la suite",
+    "sourceLabel": "Référence :",
+    "backToBlog": "Retour à tous les articles"
+  }
+}
