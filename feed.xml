@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dr. Jihad S. Husseini — Blog</title>
-    <link>https://SITE-DOMAIN-TBD/blog.html</link>
-    <atom:link href="https://SITE-DOMAIN-TBD/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://joshrhousary.github.io/dr-husseini-dental/blog.html</link>
+    <atom:link href="https://joshrhousary.github.io/dr-husseini-dental/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dental topics explained simply — new posts every Monday, Wednesday, and Friday.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 01 Oct 2026 08:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 08:00:00 GMT</lastBuildDate>
 
   </channel>
 </rss>

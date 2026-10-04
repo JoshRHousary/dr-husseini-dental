@@ -58,7 +58,7 @@ Deno.serve(async (req: Request) => {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "Website booking <booking@SITE-DOMAIN-TBD>",
+      from: "Website booking <booking@joshrhousary.github.io>",
       to: [to],
       subject: `Booking request — ${row.slot_date} ${String(row.slot_time).slice(0, 5)}`,
       html

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /
 
-Sitemap: https://SITE-DOMAIN-TBD/sitemap.xml
+Sitemap: https://joshrhousary.github.io/dr-husseini-dental/sitemap.xml
