@@ -298,3 +298,79 @@ class (`[+]`) or `lib/edit.mjs`.
 3. Supabase project for booking (`backend/README.md`), its own, never DART's.
 4. 13 bracketed copy placeholders + blog post prose, from the client.
 5. Confirm the +961 country code on both numbers.
+
+## Session 2026-10-05 (later) — ready to publish, waiting on auth
+
+Publishing was decided: **public repo `dr-husseini-dental`, GitHub Pages,
+noindexed until the real copy lands.** Everything below is committed; the
+only thing left is `gh auth login`, which is an interactive browser flow on
+the user's own account and cannot be done from here.
+
+### Preview is held out of search
+`tools/set-preview-noindex.mjs on|off` — meta robots on all 7 pages **and** a
+`robots.txt` Disallow, because either alone leaks. `off` lifts both at launch.
+The `Sitemap:` line stays either way, since `build-feeds.mjs` and
+`set-domain.mjs` read the site base back out of it. `blog.js` only ever sets
+noindex (for an unknown slug), never an index directive, so it cannot undo it.
+
+### The Pages artifact would have published the internal tree
+The workflow built from `path: .`, which puts `CLAUDE.md`, `tools/` and
+`backend/` at the site root — these notes and the Supabase schema, readable by
+anyone with the URL. The build now stages with
+`rsync --exclude-from=.pagesignore` and uploads that. `.pagesignore` is pinned
+to LF in `.gitattributes`: a trailing CR becomes part of each pattern and would
+silently exclude nothing.
+
+### Interim copy (`tools/set-interim-copy.mjs on|off`)
+The 13 bracketed placeholders would have read to Dr. Husseini as notes to
+himself. Interim strings now stand in, in all three locales, under two rules:
+
+- **Nothing verifiable is invented** — no dental school, graduation year,
+  membership or street address appears anywhere. The copy says only what this
+  brief establishes: three specialties, one practitioner, Lebanon. A
+  plausible-looking wrong credential is worse than a blank.
+- **Where the missing fact IS the content** (address, hours, map), it routes to
+  WhatsApp rather than pretending — the primary CTA anyway, so an unknown
+  address becomes a conversion path. The map block is hidden.
+
+`about.credentials.title` moved from "Credentials & training" to "Areas of
+practice", because the three items are specialties from the brief and a
+credentials heading would imply certifications nobody has stated. **When the
+client supplies real credentials, move it back.**
+
+Originals are in `assets/locales/.interim-copy-active.json`; `off` consumes it
+and restores the tree byte for byte (round-trip tested), and `check-site.mjs`
+warns for as long as the file exists, so the debt does not disappear with the
+bracket check. Only `contact.info.mapPlaceholder` is still bracketed, and it is
+hidden.
+
+### A live bug the map fix surfaced
+`[hidden]` in the UA sheet is specificity 0,0,1, so
+`.map-placeholder { display: flex }` beat it and the attribute did nothing —
+the same defect class as the two mobile regressions on 10-01, and the reason
+`.date-tooth` had needed its own `[hidden]` rule. `style.css` now carries
+`[hidden] { display: none !important }`. Audited first: every other use of the
+attribute in markup and JS means "hide", and JS shows by setting
+`.hidden = false`, which removes the attribute, so the `!important` is inert
+there.
+
+### Also
+`common.callClinic` / `common.callMobile` / `home.trust.title` are now in use
+as accessible names (see the earlier entry), so the unused-key warnings are gone.
+
+### Verified in Chromium
+index / about / contact at 1440x900 and 390x844, EN and AR: no console errors,
+no horizontal overflow, the new copy renders in both languages and both
+layouts, no bracket visible in any body text, map correctly hidden.
+Screenshots `preview/verify/c-*.png` (not deployed).
+
+### The one remaining step
+```
+gh auth login            # interactive, must be run by the user
+gh repo create dr-husseini-dental --public --source=. --remote=origin --push
+# enable Pages (source: GitHub Actions), then:
+node tools/set-domain.mjs https://<user>.github.io/dr-husseini-dental
+node tools/build-feeds.mjs
+```
+Then still open: pick a loader take, the Supabase project, the real client
+copy (`set-interim-copy.mjs off` first), blog prose, and confirming +961.
