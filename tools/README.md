@@ -69,6 +69,7 @@ them whenever you like:
 | `patch-mobile.mjs` | Added the consolidated `── MOBILE: page-local layouts ──` block to `style.css`: collapsed the booking/contact/services page-local grids, fixed the calendar tap targets, and raised form inputs to 16px so iOS stops zooming on focus. New page-local mobile rules go in that block. |
 | `patch-check-mobile.mjs`, `patch-check-fallbacks.mjs` | Added the two standing `check-site` rules: a page-local multi-column grid must have a mobile breakpoint, and the hardcoded English in a `data-i18n` element must match `en.json`. |
 | `patch-hero-fallback.mjs` | Synced the booking hero's pre-JS fallback with `en.json` (it still promised "no forms"). |
+| `patch-phone-labels.mjs` | Gave the bare `tel:` links an accessible name on all 7 pages and named the home trust list, using the three locale strings the gate had flagged as unused (`common.callClinic`, `common.callMobile`, `home.trust.title`). Attribute-only, so desktop and mobile both. |
 | `normalize-eol.mjs` | Settled the pre-existing CRLF/LF mix: CRLF for markup/styles/scripts, LF for JSON. Worth re-running if the mix creeps back. |
 
 `lib/edit.mjs` is shared by all of them: it normalises CRLF before matching and

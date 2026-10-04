@@ -258,3 +258,43 @@ interactive element now clears 40px on mobile. Screenshots in `preview/verify/`
   auth: create the repo, push, enable Pages, then
   `node tools/set-domain.mjs https://<user>.github.io/<repo>` and
   `node tools/build-feeds.mjs`.
+
+## Session 2026-10-05 — the three "unused" locale strings were missing labels
+
+`check-site.mjs` had been warning that `common.callClinic`,
+`common.callMobile` and `home.trust.title` were used by no page or script,
+with the standing instruction to "either surface them in the UI or drop
+them". They turned out to be the labels the markup was missing, not dead
+copy:
+
+- Every footer `tel:` link on all 7 pages is a bare number string
+  ("01/308206"), so its accessible name is just the digits — nothing says
+  what it dials, and the two numbers are indistinguishable to a screen
+  reader. On `contact.html` the visible "Clinic" / "Mobile" labels are
+  adjacent `<span>`s that were never programmatically tied to the links.
+- The home trust list sits inside the About section under that section's
+  heading, so it had no name of its own.
+
+`tools/patch-phone-labels.mjs` adds `aria-label` + `data-i18n-aria` to
+both tel links on all 7 pages and to the home trust `<ul>`. Attribute-only,
+so there is nothing layout-specific — the all-pages and both-layouts rules
+are satisfied by construction. AR and FR already carried all three strings.
+The gate's unused-key warnings are gone; it reports 0 errors and the only
+remaining warnings are the domain placeholder and the 13 client copy
+placeholders.
+
+Note for future scripts: `href.replace("+", "\+")` inside a `new RegExp`
+template is a trap — it escaped nothing on the first run, the pattern read
+`tel:+961...` as "tel" + one-or-more colons, and 6 of the 7 pages silently
+matched nothing while the script still reported success. Use a character
+class (`[+]`) or `lib/edit.mjs`.
+
+### Still open (unchanged from 10-03)
+1. `gh auth login` has not been run — nothing is pushed. After auth: create
+   the repo, push, enable Pages, then `node tools/set-domain.mjs
+   https://<user>.github.io/<repo>` and `node tools/build-feeds.mjs`.
+2. Pick a loader take: `assets/media/loader-1080.mp4` vs
+   `_attic/media/loader-1080-alt.mp4` — still nobody has watched either.
+3. Supabase project for booking (`backend/README.md`), its own, never DART's.
+4. 13 bracketed copy placeholders + blog post prose, from the client.
+5. Confirm the +961 country code on both numbers.
