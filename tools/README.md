@@ -71,6 +71,7 @@ them whenever you like:
 | `patch-hero-fallback.mjs` | Synced the booking hero's pre-JS fallback with `en.json` (it still promised "no forms"). |
 | `patch-phone-labels.mjs` | Gave the bare `tel:` links an accessible name on all 7 pages and named the home trust list, using the three locale strings the gate had flagged as unused (`common.callClinic`, `common.callMobile`, `home.trust.title`). Attribute-only, so desktop and mobile both. |
 | `set-preview-noindex.mjs` | `on` / `off`. Keeps the client preview out of search engines while the 13 copy placeholders are still visible: meta robots on all 7 pages **and** a `robots.txt` Disallow, since either alone leaks. Keeps the Sitemap line so `build-feeds.mjs` can still read the site base. Run `off` at launch. |
+| `set-interim-copy.mjs`, `interim-copy.json` | `on` / `off`. Stands interim copy in for the 13 strings the client still owes, so he reviews the design instead of reading bracketed notes to himself. Invents nothing verifiable - no school, year, membership or address - and routes the unknown address/hours to WhatsApp, the site's primary CTA; the map block is hidden. Records the originals in `assets/locales/.interim-copy-active.json`, which `off` consumes and `check-site.mjs` warns on for as long as it exists. Round-trip tested: `off` restores the tree byte for byte. |
 | `normalize-eol.mjs` | Settled the pre-existing CRLF/LF mix: CRLF for markup/styles/scripts, LF for JSON. Worth re-running if the mix creeps back. |
 
 `lib/edit.mjs` is shared by all of them: it normalises CRLF before matching and

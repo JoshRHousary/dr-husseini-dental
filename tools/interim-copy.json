@@ -1,0 +1,50 @@
+{
+  "en": {
+    "common.footer.hoursPlaceholder": "Message us on WhatsApp for today's hours",
+    "common.footer.addressPlaceholder": "Lebanon — ask on WhatsApp for directions",
+    "home.about.body": "Three specialties under one roof: cosmetic dentistry, endodontics, and prosthetic and implant dentistry. One dentist follows the treatment from the first examination to the final result — nothing is referred out, and nothing is done twice.",
+    "home.testimonials.title": "What patients say",
+    "home.testimonials.note": "Patient reviews will be published here as they come in.",
+    "about.hero.lead": "Careful diagnosis, unhurried appointments, and every treatment explained before it begins.",
+    "about.bio.body": "Dr. Jihad S. Husseini practises cosmetic dentistry, endodontics, and prosthetic and implant dentistry. Having all three under one roof means a case that starts as a cosmetic consultation can continue as root canal therapy or an implant without a referral — the same hand, and the same plan, from start to finish.",
+    "about.philosophy.body": "Every treatment begins with a diagnosis you can see for yourself and a plan in plain language: what it involves, what it costs, and what the alternatives are. Comfort is part of that plan rather than an afterthought.",
+    "about.credentials.title": "Areas of practice",
+    "about.credentials.item1": "Cosmetic dentistry — veneers, whitening, and smile design",
+    "about.credentials.item2": "Endodontics — root canal therapy and retreatment",
+    "about.credentials.item3": "Prosthetic and implant dentistry — crowns, bridges, and implants",
+    "contact.info.addressPlaceholder": "Ask on WhatsApp for directions",
+    "contact.info.hoursPlaceholder": "Message the clinic for today's hours"
+  },
+  "fr": {
+    "common.footer.hoursPlaceholder": "Écrivez-nous sur WhatsApp pour les horaires du jour",
+    "common.footer.addressPlaceholder": "Liban — demandez l'itinéraire sur WhatsApp",
+    "home.about.body": "Trois spécialités sous un même toit : dentisterie esthétique, endodontie et dentisterie prothétique et implantaire. Un seul praticien suit le traitement du premier examen au résultat final — aucun renvoi, aucune étape refaite.",
+    "home.testimonials.title": "Ce que disent les patients",
+    "home.testimonials.note": "Les avis des patients seront publiés ici au fur et à mesure.",
+    "about.hero.lead": "Un diagnostic minutieux, des rendez-vous sans précipitation, et chaque traitement expliqué avant de commencer.",
+    "about.bio.body": "Le Dr Jihad S. Husseini pratique la dentisterie esthétique, l'endodontie et la dentisterie prothétique et implantaire. Réunir les trois sous un même toit permet à un cas commencé en consultation esthétique de se poursuivre en traitement canalaire ou en implant sans passer par un confrère — la même main et le même plan, du début à la fin.",
+    "about.philosophy.body": "Chaque traitement commence par un diagnostic que vous pouvez constater vous-même et par un plan en langage clair : ce qu'il implique, ce qu'il coûte et quelles sont les alternatives. Le confort fait partie du plan, et non d'une réflexion après coup.",
+    "about.credentials.title": "Domaines de pratique",
+    "about.credentials.item1": "Dentisterie esthétique — facettes, blanchiment et conception du sourire",
+    "about.credentials.item2": "Endodontie — traitement et retraitement canalaire",
+    "about.credentials.item3": "Dentisterie prothétique et implantaire — couronnes, bridges et implants",
+    "contact.info.addressPlaceholder": "Demandez l'itinéraire sur WhatsApp",
+    "contact.info.hoursPlaceholder": "Écrivez à la clinique pour les horaires du jour"
+  },
+  "ar": {
+    "common.footer.hoursPlaceholder": "راسلنا على واتساب لمعرفة مواعيد اليوم",
+    "common.footer.addressPlaceholder": "لبنان — اطلب الموقع على واتساب",
+    "home.about.body": "ثلاثة تخصصات تحت سقف واحد: طب الأسنان التجميلي، ومعالجة جذور الأسنان، وتركيبات الأسنان والزرع. طبيب واحد يتابع العلاج من الفحص الأول إلى النتيجة النهائية — بلا إحالات وبلا خطوات مُعادة.",
+    "home.testimonials.title": "ما يقوله المرضى",
+    "home.testimonials.note": "ستُنشر أراء المرضى هنا تِباعًا.",
+    "about.hero.lead": "تشخيص دقيق، مواعيد بلا استعجال، وكل علاج يُشرح قبل أن يبدأ.",
+    "about.bio.body": "يمارس الدكتور جهاد س. الحسيني طب الأسنان التجميلي، ومعالجة الجذور، وتركيبات الأسنان والزرع. وجود التخصصات الثلاثة تحت سقف واحد يعني أن حالة تبدأ باستشارة تجميلية يمكن أن تتابع بمعالجة جذر أو زرع دون إحالة — اليد نفسها والخطة نفسها من البداية إلى النهاية.",
+    "about.philosophy.body": "يبدأ كل علاج بتشخيص يمكنك أن تراه بنفسك وبخطة بلغة واضحة: ما يتضمنه، وكم يكلف، وما هي البدائل. الراحة جزء من الخطة، لا أمر يُترك للنهاية.",
+    "about.credentials.title": "مجالات الممارسة",
+    "about.credentials.item1": "طب الأسنان التجميلي — القشور التجميلية والتبييض وتصميم الابتسامة",
+    "about.credentials.item2": "معالجة الجذور — علاج قنوات الجذر وإعادة المعالجة",
+    "about.credentials.item3": "تركيبات الأسنان والزرع — التيجان والجسور والزرعات",
+    "contact.info.addressPlaceholder": "اطلب الموقع على واتساب",
+    "contact.info.hoursPlaceholder": "راسل العيادة لمعرفة مواعيد اليوم"
+  }
+}

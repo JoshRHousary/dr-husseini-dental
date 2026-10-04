@@ -1,0 +1,53 @@
+{
+  "appliedOn": "2026-10-04",
+  "original": {
+    "en": {
+      "common.footer.hoursPlaceholder": "[Add clinic hours]",
+      "common.footer.addressPlaceholder": "[Add clinic address]",
+      "home.about.body": "[Add Dr. Husseini's bio: education, credentials, years in practice, and treatment philosophy.]",
+      "home.testimonials.title": "[Placeholder — replace with real patient reviews before launch]",
+      "home.testimonials.note": "Add verified Google reviews or direct patient testimonials here.",
+      "about.hero.lead": "[Add a short introductory line about Dr. Husseini's approach to dentistry.]",
+      "about.bio.body": "[Add Dr. Husseini's full bio here: dental school, university, graduation year, postgraduate training/certifications in cosmetic dentistry, endodontics, and implantology, and any professional memberships.]",
+      "about.philosophy.body": "[Add a paragraph in Dr. Husseini's own words about how he approaches diagnosis, patient comfort, and treatment planning.]",
+      "about.credentials.title": "Credentials & training",
+      "about.credentials.item1": "[Add degree / dental school]",
+      "about.credentials.item2": "[Add postgraduate certification]",
+      "about.credentials.item3": "[Add professional membership / association]",
+      "contact.info.addressPlaceholder": "[Add clinic address]",
+      "contact.info.hoursPlaceholder": "[Add clinic hours]"
+    },
+    "ar": {
+      "common.footer.hoursPlaceholder": "[أضف ساعات عمل العيادة]",
+      "common.footer.addressPlaceholder": "[أضف عنوان العيادة]",
+      "home.about.body": "[أضف السيرة الذاتية للدكتور الحسيني: التعليم، الشهادات، سنوات الخبرة، وفلسفة العلاج.]",
+      "home.testimonials.title": "[نص مؤقت — استبدله بآراء حقيقية للمرضى قبل الإطلاق]",
+      "home.testimonials.note": "أضف تقييمات Google موثّقة أو شهادات مباشرة من المرضى هنا.",
+      "about.hero.lead": "[أضف جملة تعريفية قصيرة عن أسلوب د. الحسيني في طب الأسنان.]",
+      "about.bio.body": "[أضف السيرة الكاملة للدكتور الحسيني هنا: كلية طب الأسنان، الجامعة، سنة التخرج، التدريب/الشهادات العليا في طب الأسنان التجميلي، علاج الجذور، والزراعة، وأي عضويات مهنية.]",
+      "about.philosophy.body": "[أضف فقرة بأسلوب د. الحسيني حول كيفية تعامله مع التشخيص، راحة المريض، وتخطيط العلاج.]",
+      "about.credentials.title": "الشهادات والتدريب",
+      "about.credentials.item1": "[أضف الشهادة الجامعية / كلية طب الأسنان]",
+      "about.credentials.item2": "[أضف شهادة دراسات عليا]",
+      "about.credentials.item3": "[أضف عضوية نقابية أو جمعية مهنية]",
+      "contact.info.addressPlaceholder": "[أضف عنوان العيادة]",
+      "contact.info.hoursPlaceholder": "[أضف ساعات عمل العيادة]"
+    },
+    "fr": {
+      "common.footer.hoursPlaceholder": "[Ajouter les horaires de la clinique]",
+      "common.footer.addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "home.about.body": "[Ajouter la biographie du Dr Husseini : formation, diplômes, années de pratique et philosophie de soin.]",
+      "home.testimonials.title": "[Espace réservé — remplacer par de vrais avis de patients avant le lancement]",
+      "home.testimonials.note": "Ajoutez ici des avis Google vérifiés ou des témoignages directs de patients.",
+      "about.hero.lead": "[Ajouter une courte phrase d'introduction sur l'approche du Dr Husseini.]",
+      "about.bio.body": "[Ajouter ici la biographie complète du Dr Husseini : faculté dentaire, université, année de diplôme, formations/certifications en dentisterie esthétique, endodontie et implantologie, et adhésions professionnelles.]",
+      "about.philosophy.body": "[Ajouter un paragraphe, dans les mots du Dr Husseini, sur son approche du diagnostic, du confort du patient et de la planification du traitement.]",
+      "about.credentials.title": "Diplômes & formation",
+      "about.credentials.item1": "[Ajouter le diplôme / la faculté dentaire]",
+      "about.credentials.item2": "[Ajouter une certification de troisième cycle]",
+      "about.credentials.item3": "[Ajouter une adhésion professionnelle / association]",
+      "contact.info.addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "contact.info.hoursPlaceholder": "[Ajouter les horaires de la clinique]"
+    }
+  }
+}

@@ -29,6 +29,12 @@
 }
 
 * { box-sizing: border-box; }
+
+/* The UA sheet's [hidden] { display: none } is specificity 0,0,1, so any
+   class rule that sets display beats it and the attribute silently does
+   nothing (.map-placeholder is display:flex; .date-tooth needed its own
+   rule for the same reason). Make the attribute mean what it says. */
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 
 body {

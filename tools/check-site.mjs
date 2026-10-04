@@ -309,6 +309,16 @@ for (const key of flatKeys(dicts.en)) {
 }
 
 /* ── outstanding client copy ─────────────────────────────────────────────── */
+/* Interim copy stands in for strings the client still owes. The bracketed-
+   placeholder check above goes quiet while it is on, so this keeps the debt
+   visible: the state file lists every key that was overwritten. */
+if (existsSync("assets/locales/.interim-copy-active.json")) {
+  const state = JSON.parse(readFileSync("assets/locales/.interim-copy-active.json", "utf8"));
+  const keys = Object.keys(state.original?.en || {});
+  warnings.push(`interim copy is ON since ${state.appliedOn} — ${keys.length} string(s) are stand-ins, not client copy: ${keys.join(", ")}`);
+  warnings.push(`revert with: node tools/set-interim-copy.mjs off`);
+}
+
 const placeholders = flatKeys(dicts.en)
   .filter(k => typeof getByPath(dicts.en, k) === "string" && /^\[.*\]$/.test(getByPath(dicts.en, k).trim()));
 if (placeholders.length) {

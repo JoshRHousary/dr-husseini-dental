@@ -23,8 +23,8 @@
       "explore": "Explorer",
       "contact": "Contact",
       "hours": "Horaires",
-      "hoursPlaceholder": "[Ajouter les horaires de la clinique]",
-      "addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "hoursPlaceholder": "Écrivez-nous sur WhatsApp pour les horaires du jour",
+      "addressPlaceholder": "Liban — demandez l'itinéraire sur WhatsApp",
       "rights": "Tous droits réservés."
     }
   },
@@ -54,7 +54,7 @@
     "about": {
       "eyebrow": "À propos du Dr Husseini",
       "title": "Une main précise, un fauteuil serein.",
-      "body": "[Ajouter la biographie du Dr Husseini : formation, diplômes, années de pratique et philosophie de soin.]",
+      "body": "Trois spécialités sous un même toit : dentisterie esthétique, endodontie et dentisterie prothétique et implantaire. Un seul praticien suit le traitement du premier examen au résultat final — aucun renvoi, aucune étape refaite.",
       "cta": "Lire l'histoire complète"
     },
     "trust": {
@@ -65,8 +65,8 @@
     },
     "testimonials": {
       "eyebrow": "Témoignages",
-      "title": "[Espace réservé — remplacer par de vrais avis de patients avant le lancement]",
-      "note": "Ajoutez ici des avis Google vérifiés ou des témoignages directs de patients."
+      "title": "Ce que disent les patients",
+      "note": "Les avis des patients seront publiés ici au fur et à mesure."
     },
     "cta": {
       "title": "Prêt à réserver votre visite ?",
@@ -121,21 +121,21 @@
     "hero": {
       "eyebrow": "À propos du Dr Husseini",
       "title": "Une main précise, un fauteuil serein.",
-      "lead": "[Ajouter une courte phrase d'introduction sur l'approche du Dr Husseini.]"
+      "lead": "Un diagnostic minutieux, des rendez-vous sans précipitation, et chaque traitement expliqué avant de commencer."
     },
     "bio": {
       "title": "Parcours",
-      "body": "[Ajouter ici la biographie complète du Dr Husseini : faculté dentaire, université, année de diplôme, formations/certifications en dentisterie esthétique, endodontie et implantologie, et adhésions professionnelles.]"
+      "body": "Le Dr Jihad S. Husseini pratique la dentisterie esthétique, l'endodontie et la dentisterie prothétique et implantaire. Réunir les trois sous un même toit permet à un cas commencé en consultation esthétique de se poursuivre en traitement canalaire ou en implant sans passer par un confrère — la même main et le même plan, du début à la fin."
     },
     "philosophy": {
       "title": "Philosophie de soin",
-      "body": "[Ajouter un paragraphe, dans les mots du Dr Husseini, sur son approche du diagnostic, du confort du patient et de la planification du traitement.]"
+      "body": "Chaque traitement commence par un diagnostic que vous pouvez constater vous-même et par un plan en langage clair : ce qu'il implique, ce qu'il coûte et quelles sont les alternatives. Le confort fait partie du plan, et non d'une réflexion après coup."
     },
     "credentials": {
-      "title": "Diplômes & formation",
-      "item1": "[Ajouter le diplôme / la faculté dentaire]",
-      "item2": "[Ajouter une certification de troisième cycle]",
-      "item3": "[Ajouter une adhésion professionnelle / association]"
+      "title": "Domaines de pratique",
+      "item1": "Dentisterie esthétique — facettes, blanchiment et conception du sourire",
+      "item2": "Endodontie — traitement et retraitement canalaire",
+      "item3": "Dentisterie prothétique et implantaire — couronnes, bridges et implants"
     },
     "trust": {
       "title": "Pourquoi les patients choisissent ce cabinet",
@@ -161,9 +161,9 @@
       "mobilePhoneLabel": "Mobile",
       "whatsappLabel": "WhatsApp",
       "addressLabel": "Adresse",
-      "addressPlaceholder": "[Ajouter l'adresse de la clinique]",
+      "addressPlaceholder": "Demandez l'itinéraire sur WhatsApp",
       "hoursLabel": "Horaires",
-      "hoursPlaceholder": "[Ajouter les horaires de la clinique]",
+      "hoursPlaceholder": "Écrivez à la clinique pour les horaires du jour",
       "mapPlaceholder": "[Intégrer la carte de la clinique une fois l'adresse confirmée]"
     },
     "form": {

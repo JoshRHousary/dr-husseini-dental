@@ -23,8 +23,8 @@
       "explore": "Explore",
       "contact": "Contact",
       "hours": "Hours",
-      "hoursPlaceholder": "[Add clinic hours]",
-      "addressPlaceholder": "[Add clinic address]",
+      "hoursPlaceholder": "Message us on WhatsApp for today's hours",
+      "addressPlaceholder": "Lebanon — ask on WhatsApp for directions",
       "rights": "All rights reserved."
     }
   },
@@ -54,7 +54,7 @@
     "about": {
       "eyebrow": "About Dr. Husseini",
       "title": "A precise hand, a calm chair.",
-      "body": "[Add Dr. Husseini's bio: education, credentials, years in practice, and treatment philosophy.]",
+      "body": "Three specialties under one roof: cosmetic dentistry, endodontics, and prosthetic and implant dentistry. One dentist follows the treatment from the first examination to the final result — nothing is referred out, and nothing is done twice.",
       "cta": "Read the full story"
     },
     "trust": {
@@ -65,8 +65,8 @@
     },
     "testimonials": {
       "eyebrow": "Patient stories",
-      "title": "[Placeholder — replace with real patient reviews before launch]",
-      "note": "Add verified Google reviews or direct patient testimonials here."
+      "title": "What patients say",
+      "note": "Patient reviews will be published here as they come in."
     },
     "cta": {
       "title": "Ready to book your visit?",
@@ -121,21 +121,21 @@
     "hero": {
       "eyebrow": "About Dr. Husseini",
       "title": "A precise hand, a calm chair.",
-      "lead": "[Add a short introductory line about Dr. Husseini's approach to dentistry.]"
+      "lead": "Careful diagnosis, unhurried appointments, and every treatment explained before it begins."
     },
     "bio": {
       "title": "Background",
-      "body": "[Add Dr. Husseini's full bio here: dental school, university, graduation year, postgraduate training/certifications in cosmetic dentistry, endodontics, and implantology, and any professional memberships.]"
+      "body": "Dr. Jihad S. Husseini practises cosmetic dentistry, endodontics, and prosthetic and implant dentistry. Having all three under one roof means a case that starts as a cosmetic consultation can continue as root canal therapy or an implant without a referral — the same hand, and the same plan, from start to finish."
     },
     "philosophy": {
       "title": "Treatment philosophy",
-      "body": "[Add a paragraph in Dr. Husseini's own words about how he approaches diagnosis, patient comfort, and treatment planning.]"
+      "body": "Every treatment begins with a diagnosis you can see for yourself and a plan in plain language: what it involves, what it costs, and what the alternatives are. Comfort is part of that plan rather than an afterthought."
     },
     "credentials": {
-      "title": "Credentials & training",
-      "item1": "[Add degree / dental school]",
-      "item2": "[Add postgraduate certification]",
-      "item3": "[Add professional membership / association]"
+      "title": "Areas of practice",
+      "item1": "Cosmetic dentistry — veneers, whitening, and smile design",
+      "item2": "Endodontics — root canal therapy and retreatment",
+      "item3": "Prosthetic and implant dentistry — crowns, bridges, and implants"
     },
     "trust": {
       "title": "Why patients choose this practice",
@@ -161,9 +161,9 @@
       "mobilePhoneLabel": "Mobile",
       "whatsappLabel": "WhatsApp",
       "addressLabel": "Address",
-      "addressPlaceholder": "[Add clinic address]",
+      "addressPlaceholder": "Ask on WhatsApp for directions",
       "hoursLabel": "Hours",
-      "hoursPlaceholder": "[Add clinic hours]",
+      "hoursPlaceholder": "Message the clinic for today's hours",
       "mapPlaceholder": "[Embed clinic map once address is confirmed]"
     },
     "form": {
