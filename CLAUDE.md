@@ -374,3 +374,41 @@ node tools/build-feeds.mjs
 ```
 Then still open: pick a loader take, the Supabase project, the real client
 copy (`set-interim-copy.mjs off` first), blog prose, and confirming +961.
+
+## PUBLISHED 2026-10-05 — https://joshrhousary.github.io/dr-husseini-dental/
+
+Repo: `github.com/JoshRHousary/dr-husseini-dental` (public, Pages via Actions).
+First deploy green; build 12s, deploy 9s.
+
+- `gh auth login` granted `repo` but not `workflow`, so `gh repo create --push`
+  was rejected for `.github/workflows/pages.yml`. The repo was created anyway;
+  a plain `git push` then succeeded, because git goes through Git Credential
+  Manager and not gh's OAuth token. Worth remembering: gh's token scopes are
+  not git's credentials here.
+- Pages enabled with
+  `gh api -X POST repos/.../pages -f build_type=workflow`.
+- `node tools/set-domain.mjs https://joshrhousary.github.io/dr-husseini-dental`
+  updated 12 files; `build-feeds.mjs` wrote 6 pages, 0 posts.
+
+### Verified against the live URL
+All 6 pages at 1440x900 and 390x844, plus Arabic on home and booking: no
+console errors, no 4xx, no horizontal overflow. `CLAUDE.md`, `tools/` and
+`backend/` all return **404** — the `.pagesignore` staging works. Served head
+carries `noindex,nofollow`. Screenshots `preview/verify/live-*.png`.
+
+**Note on robots.txt:** on a github.io *project* site, only
+`joshrhousary.github.io/robots.txt` is honoured — the one at
+`/dr-husseini-dental/robots.txt` is ignored by crawlers. The per-page
+`noindex,nofollow` meta is what actually holds the preview back, and it does.
+A real domain later restores the robots.txt layer.
+
+### Still open
+1. **Client copy** — `node tools/set-interim-copy.mjs off` first, then paste the
+   real strings. Lift the preview with
+   `node tools/set-preview-noindex.mjs off` only once that is done.
+2. Pick a loader take (`assets/media/loader-1080.mp4` vs
+   `_attic/media/loader-1080-alt.mp4`) - still unwatched.
+3. Supabase project for booking (`backend/README.md`), its own, never DART's.
+4. Blog prose; `posts.json` is empty.
+5. Confirm +961 on both numbers.
+6. A real domain, when registered: rerun `set-domain.mjs` and `build-feeds.mjs`.
