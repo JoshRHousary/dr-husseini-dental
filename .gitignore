@@ -10,3 +10,6 @@ preview/
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Build output staged by the Pages workflow
+_site/

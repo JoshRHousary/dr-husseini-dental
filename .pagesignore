@@ -1,0 +1,18 @@
+# What rsync leaves out of the GitHub Pages artifact.
+# The repo root holds internal files the site does not serve - publishing
+# them would put CLAUDE.md's client notes and backend/'s Supabase schema at
+# the site root for anyone with the URL.
+.git
+.github
+_site
+.pagesignore
+tools
+backend
+_attic
+preview
+CLAUDE.md
+README.md
+.gitignore
+.gitattributes
+Recording*.mp4
+node_modules

@@ -40,10 +40,18 @@ jobs:
         run: node tools/validate-posts.mjs
       - name: Rebuild sitemap + feed
         run: node tools/build-feeds.mjs
+      - name: Stage only the deployable tree
+        # path: . would publish CLAUDE.md, tools/ and backend/ at the site
+        # root - internal notes and the Supabase schema, readable by anyone
+        # with the URL. Only the files the site actually serves go up.
+        run: |
+          mkdir -p _site
+          rsync -a --exclude-from=.pagesignore ./ _site/
+          ls -la _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - run: echo "gate passed"
 
   deploy:

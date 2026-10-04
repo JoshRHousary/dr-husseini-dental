@@ -17,3 +17,6 @@
 *.webp   binary
 *.png    binary
 *.jpg    binary
+
+# rsync --exclude-from needs LF; a trailing CR becomes part of the pattern
+.pagesignore text eol=lf
