@@ -333,7 +333,7 @@ body.home-mouth { overflow: hidden; height: 100vh; background: #F6F1E7; }
   background: rgba(255, 255, 255, 0);
   transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
 }
-.tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] {
+.tooth:hover, .tooth:focus-visible {
   background: rgba(15, 92, 86, .88); color: #fff;
   box-shadow: 0 6px 18px -6px rgba(10, 62, 58, .55);
   transform: translateY(-2px) scale(1.04);
@@ -367,7 +367,11 @@ body.home-mouth { overflow: hidden; height: 100vh; background: #F6F1E7; }
 .mouth-window .hero-art { display: none; }
 
 /* header on home: only brand + language switch float over the cream margins (menu is on the teeth) */
-body.home-mouth .site-header { position: fixed; left: 0; right: 0; top: 0; background: transparent; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none; }
+/* z-index matters here: .mouth-stage is position:relative and comes after
+   the header in the DOM, so with both at z-index auto the stage painted
+   over the header. On phones that put the mouth banner on top of the open
+   nav drawer - the links were visible but could not be tapped. */
+body.home-mouth .site-header { position: fixed; left: 0; right: 0; top: 0; z-index: 50; background: transparent; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: none; }
 body.home-mouth .site-header .brand, body.home-mouth .site-header .lang-switch { pointer-events: auto; }
 body.home-mouth .primary-nav, body.home-mouth .nav-actions > .btn, body.home-mouth .nav-toggle { display: none; }
 
@@ -379,7 +383,7 @@ body.home-mouth .primary-nav, body.home-mouth .nav-actions > .btn, body.home-mou
   .mouth-stage-img { position: static; height: 42vh; object-fit: cover; object-position: 50% 45%; }
   .teeth-nav { display: none; }
   .mouth-window { position: relative; left: auto; right: auto; top: auto; bottom: auto; overflow: visible; margin: -36px 12px 0; font-size: 15px; }
-  body.home-mouth .site-header { position: sticky; background: rgba(251,248,243,.92); pointer-events: auto; border-bottom: 1px solid var(--line); }
+  body.home-mouth .site-header { position: sticky; top: 0; z-index: 50; background: rgba(251,248,243,.92); pointer-events: auto; border-bottom: 1px solid var(--line); }
   body.home-mouth .primary-nav { display: flex; }
   body.home-mouth .nav-actions > .btn { display: none; }
   body.home-mouth .nav-toggle { display: inline-flex; }
@@ -388,7 +392,7 @@ body.home-mouth .primary-nav, body.home-mouth .nav-actions > .btn, body.home-mou
 
 /* ---- menu shrunk to sit on the teeth inside the mouth ---- */
 .tooth { font-size: clamp(8px, .78vw, 11px); letter-spacing: .1em; border-radius: 38% 38% 46% 46% / 20% 20% 40% 40%; }
-.tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] { transform: none; box-shadow: none; background: rgba(15, 92, 86, .9); color: #fff; }
+.tooth:hover, .tooth:focus-visible { transform: none; box-shadow: none; background: rgba(15, 92, 86, .9); color: #fff; }
 .lang-teeth { position: absolute; inset: 0; z-index: 3; pointer-events: none; display: block; background: none; padding: 0; }
 .lang-teeth button {
   position: absolute; pointer-events: auto; cursor: pointer;
@@ -421,9 +425,20 @@ body.home-mouth .site-header .lang-switch { display: none; }
     color: #7A2621;
     border-radius: 40% 40% 46% 46% / 22% 22% 40% 40%;
   }
-  .tooth:hover, .tooth:focus-visible, .tooth[aria-current="page"] { background: #B23F38; color: #FFF7F0; }
+  /* Hover stays mouth-red, matching the drill's .tooth-drilled fill. The
+     current page is no longer a red fill at all - it is the enamel gleam
+     in the PAGE TRANSITION block at the end of this file. */
+  .tooth:hover, .tooth:focus-visible { background: #B23F38; color: #FFF7F0; }
   .lang-teeth button { font-size: .6cqw; color: #7A2621; }
-  .lang-teeth button:hover, .lang-teeth button.active { background: #B23F38; color: #FFF7F0; }
+  .lang-teeth button:hover { background: #B23F38; color: #FFF7F0; }
+  /* the selected language is a tooth you are standing on too, so it holds
+     the same gleam as the current page rather than the old red fill */
+  .lang-teeth button.active {
+    background: rgba(255, 252, 245, .96); color: #7A2621;
+    box-shadow: 0 0 1.3cqw .26cqw rgba(255, 243, 214, .85),
+                0 0 .42cqw .08cqw rgba(255, 255, 255, .95);
+    animation: toothGleam 4.2s ease-in-out infinite;
+  }
 
   /* window: smaller rect that sits inside the cavity, no background */
   .mouth-window {
@@ -665,6 +680,34 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
 }
 
 /* ── Sticky WhatsApp CTA ──
+   The base rule was lost before the repo's first commit - most likely taken
+   out with the dead .mouth-hero block - leaving only the mobile overrides
+   below, which tune `bottom`/`right` on an element that was no longer
+   positioned. The site's primary CTA was rendering as a stray inline link in
+   the document flow, above the header, on every page: at 390px it pushed the
+   sticky header 423px down, so the header never stuck and the last drawer
+   links fell off the bottom of the screen. Restored here. */
+.whatsapp-float {
+  position: fixed;
+  z-index: 60;
+  bottom: 22px; right: 22px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: #25D366;
+  color: #fff;
+  font: 600 15px/1 var(--font-body);
+  text-decoration: none;
+  box-shadow: 0 16px 34px -16px rgba(37, 211, 102, .65);
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.whatsapp-float svg { width: 20px; height: 20px; flex: none; }
+@media (hover: hover) {
+  .whatsapp-float:hover { background: #1EBE59; transform: translateY(-2px); }
+}
+body[dir="rtl"] .whatsapp-float { right: auto; left: 22px; }
+
+/* ── Sticky WhatsApp CTA: phones ──
    ~195x48px fixed bottom-right, about half the screen width at 390px, with no
    compensating page padding — it covered the booking page's own Confirm button
    (the same action), the tel: buttons and the copyright line. */
@@ -816,8 +859,7 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
   transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
 }
 .palate-nav a:hover,
-.palate-nav a:focus-visible,
-.palate-nav a[aria-current="page"] {
+.palate-nav a:focus-visible {
   background: rgba(255, 244, 238, .92);
   color: #7A2621;
   text-shadow: none;
@@ -1155,4 +1197,172 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
     align-items: center;
     min-height: 44px;
   }
+}
+
+/* ============================================================
+   ── PAGE TRANSITION: shine, then the mouth smiles ──
+   ============================================================
+   Clicking a menu tooth shines that tooth, ripples the light along the arch,
+   closes the mouth into a shiny smile, and the next page opens out of it.
+   Because this is a multi-page site the overlay cannot survive the
+   navigation, so the sequence is split: the outgoing page plays the close,
+   the arriving page plays the open. assets/js/mouth-transition.js drives it.
+
+   The shine vocabulary deliberately mirrors the booking calendar's
+   toothShine / toothShineStrong (and its --shine-delay stagger) so the two
+   animations read as one idea, but under their own class names: the booking
+   confirm sequence is the conversion path and is not touched by any of this.
+   ------------------------------------------------------------ */
+
+/* ── the current page's tooth: a held gleam, not a red fill ── */
+@media (min-width: 901px) {
+  .tooth[aria-current="page"] {
+    background: rgba(255, 252, 245, .96);
+    color: #7A2621;
+    box-shadow: 0 0 1.3cqw .26cqw rgba(255, 243, 214, .85),
+                0 0 .42cqw .08cqw rgba(255, 255, 255, .95);
+    animation: toothGleam 4.2s ease-in-out infinite;
+  }
+  /* The drill parks a red fill on whatever tooth is hovered. On the tooth you
+     are already standing on, the gleam wins - losing the "you are here" marker
+     on hover reads as a bug. (0,3,0) beats .tooth.tooth-drilled at (0,2,0). */
+  .tooth[aria-current="page"].tooth-drilled,
+  .tooth[aria-current="page"]:hover,
+  .tooth[aria-current="page"]:focus-visible {
+    background: rgba(255, 255, 255, .99);
+    color: #7A2621;
+    box-shadow: 0 0 1.8cqw .36cqw rgba(255, 246, 224, .95),
+                0 0 .5cqw .1cqw rgba(255, 255, 255, 1);
+  }
+
+  /* booking puts the menu on the palate: light pill on red, so the gleam
+     inverts - it glows outward instead of filling. */
+  .palate-nav a[aria-current="page"] {
+    background: rgba(255, 248, 240, .96);
+    color: #7A2621;
+    text-shadow: none;
+    box-shadow: 0 0 1.1cqw .2cqw rgba(255, 240, 214, .7);
+    animation: toothGleam 4.2s ease-in-out infinite;
+  }
+}
+
+@keyframes toothGleam {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.09); }
+}
+
+/* ── the click: the tooth shines, then the light runs along the arch ── */
+.teeth-nav .tooth.tn-shine-strong {
+  animation: tnShineStrong .46s ease-out both;
+  z-index: 1;
+}
+.teeth-nav .tooth.tn-shine {
+  animation: tnShine .5s ease-out var(--shine-delay, 0ms) both;
+}
+@keyframes tnShineStrong {
+  0%   { background: rgba(255, 252, 245, .9); box-shadow: none; transform: none; }
+  35%  { background: #FFFFFF; color: #7A2621;
+         box-shadow: 0 0 2.4cqw .55cqw rgba(255, 255, 255, .95); transform: scale(1.13); }
+  100% { background: #FFFFFF; color: #7A2621;
+         box-shadow: 0 0 1.5cqw .3cqw rgba(255, 250, 240, .8); transform: scale(1.04); }
+}
+@keyframes tnShine {
+  0%   { background: transparent; }
+  40%  { background: rgba(255, 252, 245, .95); color: #7A2621;
+         box-shadow: 0 0 1.5cqw .28cqw rgba(255, 246, 230, .9); }
+  100% { background: transparent; }
+}
+
+/* mobile has no teeth: the tapped drawer link flashes instead */
+nav.primary-nav a.tn-tap { animation: linkTap .34s ease-out both; }
+@keyframes linkTap {
+  0%   { background: transparent; }
+  40%  { background: rgba(228, 240, 238, .95); color: var(--primary-dark); }
+  100% { background: transparent; }
+}
+nav.primary-nav a[aria-current="page"] {
+  text-shadow: 0 0 10px rgba(15, 92, 86, .28);
+}
+
+/* ── the overlay the mouth closes over ── */
+.page-transition {
+  position: fixed; inset: 0; z-index: 9100;
+  background: #F6F1E7;
+  opacity: 0;
+  transition: opacity .18s linear;
+  pointer-events: none;
+}
+.page-transition.pt-on { opacity: 1; }
+.pt-clip, .pt-still {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .12s linear;
+}
+.page-transition.pt-closing #ptClose,
+.page-transition.pt-opening #ptOpen,
+.page-transition.pt-still-on #ptStill { opacity: 1; }
+
+/* "the smile all shiny": a warm specular band travelling along the arch, the
+   deepbook smile-curve read as light rather than a flat highlight. Composited
+   over the clip because the clips cannot be re-rendered with light baked in,
+   and because this stays tunable without a re-encode. */
+.pt-gleam {
+  position: absolute; inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    linear-gradient(104deg,
+      rgba(255, 255, 255, 0) 34%,
+      rgba(255, 250, 235, .50) 46%,
+      rgba(255, 255, 255, .80) 50%,
+      rgba(255, 248, 230, .50) 54%,
+      rgba(255, 255, 255, 0) 66%);
+  background-size: 260% 100%;
+  background-position: 120% 0;
+  /* Unmasked, the screen blend lifts the cream surround as much as the teeth
+     and the whole frame reads as a camera flash. Masked to the middle of the
+     frame, the light lands on the smile, which is the point. */
+  -webkit-mask-image: radial-gradient(ellipse 42% 32% at 50% 50%, #000 0%, #000 52%, transparent 100%);
+          mask-image: radial-gradient(ellipse 42% 32% at 50% 50%, #000 0%, #000 52%, transparent 100%);
+}
+.page-transition.pt-closing .pt-gleam { animation: gleamSweep .62s cubic-bezier(.33, 0, .2, 1) both; }
+.page-transition.pt-opening .pt-gleam { animation: gleamFade .42s ease-out both; }
+@keyframes gleamSweep {
+  0%   { opacity: 0;  background-position: 120% 0; }
+  45%  { opacity: .85; }
+  100% { opacity: 1;  background-position: -40% 0; }
+}
+@keyframes gleamFade {
+  0%   { opacity: 1; background-position: -40% 0; }
+  100% { opacity: 0; background-position: -140% 0; }
+}
+/* a brief lift on the footage itself, peaking on the full smile */
+.page-transition.pt-closing .pt-clip { animation: smileLift .62s ease-out both; }
+@keyframes smileLift {
+  0%   { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1.1) saturate(1.06); }
+}
+
+/* The arriving page is covered before first paint, so there is no flash of
+   the new page under the smile. The inline head script sets this, and
+   mouth-transition.js takes it off once the opening clip is away. */
+html.dh-arriving body { visibility: hidden; }
+html.dh-arriving .page-transition { visibility: visible; opacity: 1; }
+/* the smile still stands in until the opening clip is decoded, so the
+   cover is never a bare cream rectangle */
+html.dh-arriving #ptStill { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tooth[aria-current="page"],
+  .palate-nav a[aria-current="page"],
+  .teeth-nav .tooth.tn-shine,
+  .teeth-nav .tooth.tn-shine-strong,
+  nav.primary-nav a.tn-tap,
+  .page-transition .pt-gleam,
+  .page-transition .pt-clip { animation: none; }
+  .page-transition { display: none; }
+  html.dh-arriving body { visibility: visible; }
 }

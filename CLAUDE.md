@@ -412,3 +412,86 @@ A real domain later restores the robots.txt layer.
 4. Blog prose; `posts.json` is empty.
 5. Confirm +961 on both numbers.
 6. A real domain, when registered: rerun `set-domain.mjs` and `build-feeds.mjs`.
+
+## Session 2026-10-06 — the menu selector becomes shine, then a smile
+
+The current page's tooth was a solid maroon fill (`#B23F38`) — the one place
+the mouth concept dropped into ordinary web widget. It is now the mouth's own
+language: click a menu tooth and it shines, the light runs along the arch, the
+mouth closes into a shiny smile, and the next page opens out of it. The tooth
+you are standing on holds a quiet gleam (Home glows on the home page), and the
+selected language tooth now matches it instead of staying red.
+
+Specced with the user: ~1s total, mobile included, reusing the rendered smile
+clips. Design read from the brief's own references — landonorris (mask/morph
+reveal, not a fade), dbrand (decisive pacing, hence 1s not 5s), deepbook (the
+"smile curve" as light travelling along the tooth line).
+
+### Split across two page loads
+This is a multi-page site, so an overlay cannot survive a navigation. The
+outgoing page shines and closes; the arriving page opens and uncovers. A
+one-shot `sessionStorage` baton (`dh_pt`) carries it, read *and removed* by an
+inline `<head>` script that sets `html.dh-arriving`, so the cover is up before
+first paint and a plain refresh never replays the opening half. That split is
+also what hides the page load inside the covered moment.
+
+Measured end to end in Chromium: **794ms desktop / 872ms mobile** from click to
+the arriving page's DOMContentLoaded, then ~500ms of opening clip.
+
+### Clips: 11.4MB would not have been acceptable
+`mouth-close-smile.mp4` + `mouth-smile-open.mp4` are 5.7MB each, 5.04s,
+1924x1076 at ~9Mbps. Fine on booking, where they are `preload="none"` and only
+a patient who confirms pays for them; indefensible on every menu click on a
+Lebanese mobile connection. `tools/make-transition-clips.mjs` cuts the useful
+motion (close 1.9-4.2s, open 1.0-3.3s), speeds it 4.6x and re-encodes to
+**86KB / 94KB** at 1280x716. Same footage, no new renders — the Higgsfield
+balance is 0 and the trial has lapsed. ffmpeg comes from `imageio_ffmpeg`;
+there is no system ffmpeg on this machine.
+
+The pair is warmed at `requestIdleCallback` after load, never on save-data or
+2g/3g. Warming on hover alone was too late: the fetch started on the click
+itself and every run fell through to the 900ms cap.
+
+### The shine is composited, not rendered
+`.pt-gleam` sweeps a warm specular band over the clip, masked to the middle of
+the frame — unmasked, the screen blend lifted the cream surround as much as the
+teeth and it read as a camera flash. The tooth shine reuses the booking
+calendar's vocabulary (`toothShine`/`toothShineStrong`, the `--shine-delay`
+stagger) under its own `.tn-*` names, so `booking-teeth.js` and `#smileSequence`
+are untouched — the booking confirm is the conversion path.
+
+### Two pre-existing P0 bugs found while verifying mobile
+Both predate the first commit and were live on the deployed site. Neither was
+caused by this work; both were blocking the mobile verification.
+
+1. **The WhatsApp float had no base CSS rule at all.** Only the mobile
+   overrides survived (`bottom`/`right`/`padding`), tuning an element that was
+   never positioned — most likely lost with the dead `.mouth-hero` block. The
+   site's **primary CTA** was rendering as a stray inline link in the document
+   flow above the header. At 390px it pushed the sticky header 423px down the
+   page, so the header never stuck. Restored.
+2. **The mobile nav drawer could be opened but not tapped.** `.mouth-stage` is
+   `position: relative` and comes after the header in the DOM, so with both at
+   `z-index: auto` the mouth banner painted over the open drawer — the links
+   were visible, and every tap hit the image. On phones the whole menu was
+   dead. The header now carries `z-index: 50` (and `top: 0` when sticky).
+
+Verified by hit-testing `document.elementFromPoint` on the drawer links before
+and after, and against a clean `git archive` of HEAD to confirm both predate
+this session.
+
+### Verification
+- `check-site.mjs` gains three rules: every page must carry `#pageTransition`,
+  `mouth-transition.js`, and the inline head script. Negative-tested in a
+  sandbox copy — removing the overlay fails the gate with both messages.
+- Swept all 6 pages x {1440x900, 390x844} x {EN, AR} = **24 combinations**: the
+  overlay plays on arrival, the baton is consumed, `dh-arriving` is cleared,
+  the body is visible, the overlay ends hidden, no horizontal overflow, no
+  console errors and no 4xx. The only console noise is `blog.js` fetching
+  `posts.json`, which `file://` blocks — pre-existing, fine over http, and
+  `posts.json` is empty anyway.
+- Reduced motion navigates in 0.37s with no overlay and no baton; ctrl-click
+  opens a new tab and does not transition; the back button does not replay.
+- The booking confirm sequence is intact: 32 date teeth, `playConfirmSequence`
+  present, `#smileSequence` untouched.
+- Frames in `preview/verify/tr-*.png`.

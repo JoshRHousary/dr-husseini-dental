@@ -48,8 +48,15 @@
   body[dir="rtl"] .service-list li { padding-left: 0; padding-right: 22px; }
   body[dir="rtl"] .service-list li::before { left: auto; right: 0; }
 </style>
+<script>/* cover before first paint if we arrived through the smile */(function(){try{if(sessionStorage.getItem("dh_pt")){sessionStorage.removeItem("dh_pt");if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.className+=" dh-arriving";}}}catch(e){}})();</script>
 </head>
 <body class="home-mouth">
+<div class="page-transition" id="pageTransition" aria-hidden="true">
+  <img class="pt-still" id="ptStill" src="assets/media/mouth-smile.jpg" alt="">
+  <video class="pt-clip" id="ptClose" muted playsinline preload="none"><source src="assets/media/smile-close-fast.mp4" type="video/mp4"></video>
+  <video class="pt-clip" id="ptOpen" muted playsinline preload="none"><source src="assets/media/smile-open-fast.mp4" type="video/mp4"></video>
+  <div class="pt-gleam"></div>
+</div>
 
 </div>
 
@@ -221,5 +228,6 @@
 <script src="assets/locales/locales.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/drill.js"></script>
+<script src="assets/js/mouth-transition.js"></script>
 </body>
 </html>

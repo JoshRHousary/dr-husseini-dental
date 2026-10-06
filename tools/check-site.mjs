@@ -180,6 +180,21 @@ for (const page of PAGES) {
   /* ── mobile nav must exist ─────────────────────────────────────────────── */
   // Without it the six-link desktop nav stays on screen on phones, the header
   // overflows the viewport and the language switch is pushed off the edge.
+  /* The menu transition is split across two page loads: the outgoing page
+     plays the close, the arriving page plays the open. A page missing any of
+     the three parts still navigates (the module always falls through to the
+     link) but breaks the illusion - you would get a mouth closing and then a
+     hard cut, or a page that was covered and never uncovers. */
+  if (!html.includes('id="pageTransition"')) {
+    errors.push(`${page}: no #pageTransition overlay — the menu transition has nothing to play into`);
+  }
+  if (!html.includes("mouth-transition.js")) {
+    errors.push(`${page}: mouth-transition.js is not loaded`);
+  }
+  if (!html.includes('sessionStorage.getItem("dh_pt")')) {
+    errors.push(`${page}: missing the inline head script that uncovers an arriving page`);
+  }
+
   if (!html.includes('class="nav-toggle"')) {
     errors.push(`${page}: no .nav-toggle — the mobile nav is unreachable on this page`);
   }
