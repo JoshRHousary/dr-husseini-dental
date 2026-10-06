@@ -7,7 +7,7 @@
 
    Exits non-zero on an error. Run: node tools/check-site.mjs */
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, normalize } from "node:path";
 
 const PAGES = ["index.html", "about.html", "services.html", "booking.html",
@@ -125,7 +125,19 @@ for (const page of PAGES) {
 
   /* ── loader + script order ─────────────────────────────────────────────── */
   if (!html.includes('class="mouth-stage-video"')) errors.push(`${page}: stage intro video missing`);
-  if (!html.includes('data-hq="')) warnings.push(`${page}: intro video has no data-hq (no 1080p encode)`);
+  /* These two used to be one rule asking for data-hq. The second encode is
+     gone on purpose: it was swapped in at DOMContentLoaded, after preload
+     had already fetched the first file, so desktop downloaded both and
+     watched one (9.41MB for a first visit) — and the two files were separate
+     Kling takes, so the intro changed at 1200px. preload="none" is what keeps
+     the clip unfetched until main.js decides the intro will actually run. */
+  const introTag = /<video class="mouth-stage-video"[^>]*>/.exec(html);
+  if (introTag && /data-hq="/.test(introTag[0])) {
+    errors.push(`${page}: intro video has data-hq — the second encode was removed, it double-fetches`);
+  }
+  if (introTag && !/preload="none"/.test(introTag[0])) {
+    errors.push(`${page}: intro video must be preload="none" — otherwise it is fetched before anyone decides it plays`);
+  }
 
   const localesAt = html.indexOf("assets/locales/locales.js");
   const mainAt = html.indexOf("assets/js/main.js");
@@ -321,6 +333,38 @@ for (const key of flatKeys(dicts.en)) {
       if (Number(f[1]) < 13) warnings.push(`style.css: font-size ${f[1]}px inside a max-width block — under the 13px mobile floor`);
     }
   }
+}
+
+/* ── media weight ────────────────────────────────────────────────────────── */
+/* Every clip in this project arrived from the generator at ~9Mbps and was once
+   shipped exactly as rendered: a first visit to the home page cost 3.47MB on a
+   phone and 9.41MB on desktop, in front of a Lebanese mobile connection. The
+   masters live in _attic/media (not served, not in git); assets/media holds
+   encodes only. Dropping a fresh render straight into assets/media is the
+   mistake this catches, because nothing else would notice until someone
+   measured it again.
+
+   Re-encode with: node tools/make-loader-encodes.mjs */
+const MEDIA_BUDGET = 900 * 1024;
+const MEDIA_TOTAL_BUDGET = 2 * 1024 * 1024;
+let mediaTotal = 0;
+for (const file of readdirSync("assets/media")) {
+  if (!/\.(mp4|webm|mov)$/i.test(file)) continue;
+  const bytes = statSync(join("assets/media", file)).size;
+  mediaTotal += bytes;
+  if (bytes > MEDIA_BUDGET) {
+    errors.push(
+      `assets/media/${file}: ${(bytes / 1024).toFixed(0)}KB exceeds the ` +
+      `${(MEDIA_BUDGET / 1024).toFixed(0)}KB per-clip budget — re-encode it ` +
+      `(node tools/make-loader-encodes.mjs), do not serve a master`
+    );
+  }
+}
+if (mediaTotal > MEDIA_TOTAL_BUDGET) {
+  warnings.push(
+    `assets/media video totals ${(mediaTotal / 1024 / 1024).toFixed(2)}MB — over ` +
+    `the ${(MEDIA_TOTAL_BUDGET / 1024 / 1024).toFixed(0)}MB this site budgets for motion`
+  );
 }
 
 /* ── outstanding client copy ─────────────────────────────────────────────── */

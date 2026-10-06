@@ -25,7 +25,11 @@ import { existsSync, statSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-const SRC = "assets/media";
+/* The 9Mbps masters moved to _attic/media on 2026-10-06, when the served copies
+   were re-encoded (tools/make-loader-encodes.mjs). Cut from the masters, never
+   from the served file - a cut of a re-encode loses a generation for nothing. */
+const SRC = "_attic/media";
+const OUT = "assets/media";
 const CUTS = [
   { from: "mouth-close-smile.mp4", to: "smile-close-fast.mp4", ss: "1.90", end: "4.20" },
   { from: "mouth-smile-open.mp4",  to: "smile-open-fast.mp4",  ss: "1.00", end: "3.30" },
@@ -56,7 +60,7 @@ console.log(`ffmpeg: ${ffmpeg}`);
 
 for (const cut of CUTS) {
   const src = join(SRC, cut.from);
-  const out = join(SRC, cut.to);
+  const out = join(OUT, cut.to);
   if (!existsSync(src)) throw new Error(`missing source: ${src}`);
 
   execFileSync(ffmpeg, [

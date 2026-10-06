@@ -565,3 +565,110 @@ gradient. Pinned to `inset: 0 0 auto 0; height: 42vh`. Verified both boxes read
 
 ### Still open — unchanged
 Client copy, loader take, Supabase, blog prose, +961 confirmation, real domain.
+
+## Session 2026-10-06 (third) — the intro cost 3.5MB on a phone
+
+Measured before touching anything: a first visit to the home page transferred
+**3.47MB at 390x844 and 9.41MB at 1440x900**, nearly all of it video. The brief
+puts this clinic in Lebanon and makes conversion the whole point; at a real
+Beirut mobile rate that is 15-25 seconds of loading animation standing in front
+of the page. The 10-06 session had already made this argument for the menu
+clips (11.4MB -> 180KB) — the loader and the booking confirm never got the pass.
+
+**Now: 0.94MB on both, and 0.45MB with no video at all on save-data or 3g.**
+
+### Nothing had ever been encoded for delivery
+Every clip was untouched Kling output at ~9Mbps, shipped exactly as rendered.
+`tools/make-loader-encodes.mjs` encodes the masters (x264 veryslow, high
+profile, `+faststart`) and reports SSIM against each master, because a saving
+should be quoted with its cost attached:
+
+| | before | after | SSIM |
+|---|---|---|---|
+| `loader-720.mp4` | 2,839KB | **292KB** | 0.987 |
+| `mouth-close-smile.mp4` | 5,406KB | 586KB | 0.991 |
+| `mouth-smile-open.mp4` | 5,600KB | 616KB | 0.991 |
+
+SSIM ≥0.987 is visually transparent on this footage — smooth skin and gum
+gradients, no fine detail to lose. Checked by eye too, cropped to the dark
+throat where CRF 27 would band first: tooth edges, tongue papillae and the
+gradient all hold.
+
+The masters moved to `_attic/media/`, which is gitignored — they are recoverable
+from git history at `2153f0f`, the commit before this one.
+
+### The 720 and the 1080 were different takes, not two sizes
+`chooseIntroEncode()` served `loader-720.mp4` under 1200px and `loader-1080.mp4`
+above it, under a comment claiming "Same frames and timing either way". They
+were two separate Kling submissions. **SSIM between them is 0.871** — at t=1.0s
+one has already parted the teeth while the other's lips are still shut. The
+site had been playing a different animation depending on how wide the window
+happened to be, and the same visitor crossing 1200px saw it change its mind.
+Frame strip in `preview/verify/loader-takes.png`.
+
+Both land on `mouth-open.jpg` cleanly (SSIM 0.972 and 0.978), so the cross-fade
+handover was never at risk either way — the choice was only ever aesthetic.
+Everything now derives from one master; `--master` swaps which take that is.
+
+### Desktop downloaded both and watched one
+`chooseIntroEncode()` ran at DOMContentLoaded, but the markup carried
+`preload="auto"` with a `src`, so the browser had already started the 2.8MB
+fetch at parse time. The swap then pulled 5.9MB more. That is the whole 9.41MB.
+
+Both the function and the second encode are gone. The stage video is
+`preload="none"` on all 7 pages (`tools/patch-intro-preload.mjs`), and
+`initStageIntro()` sets `preload="auto"` + `load()` at the one point that has
+decided the intro will actually run — the same idiom `mouth-transition.js:62`
+already used to warm the menu clips.
+
+That also means the five-in-six page loads where the intro does *not* play (it
+is once per session) now cost **zero** bytes of video instead of 2.8MB.
+
+### save-data now skips the clip instead of shrinking it
+The connection check only ever downgraded the *tier*, so a save-data visitor
+still paid for the whole 2.8MB before it decided they could not afford the
+bigger one. `thinPipe()` is now one of the conditions that skips the intro
+outright. It lives in `main.js` (first script on every page) as `window.DH_NET`;
+`mouth-transition.js` calls it and keeps a local copy as a fallback, so the two
+cannot drift on what counts as a thin pipe.
+
+### The gate
+Three new rules in `check-site.mjs`, all negative-tested in a sandbox copy by
+planting the faults: a `data-hq` attribute is now an **error** (it double-
+fetches), a stage video without `preload="none"` is an error, and any file in
+`assets/media/` over 900KB is an error naming the re-encode command. The old
+rule warning when `data-hq` was *absent* is gone — it was asking for the bug.
+A total-weight warning fires over 2MB. Served video is now 2.1MB in five files.
+
+`make-transition-clips.mjs` reads from `_attic/media` so the fast cuts keep
+coming from the masters and never from a re-encode.
+
+### Verification
+- Transfer re-measured the way the problem was found, over a local server:
+
+  | | before | after |
+  |---|---|---|
+  | mobile first visit | 3.47MB | **0.94MB** |
+  | desktop first visit | 9.41MB | **0.94MB** |
+  | save-data / 3g | 3.47MB | **0.45MB**, zero mp4 |
+  | 2nd page, same session | — | loader not re-fetched |
+
+  `loader-1080.mp4` does not appear in any request list.
+- 6 pages x {390x844, 1440x900} x {EN, AR} = **24 combinations**: the clip plays
+  through to t=5.04s, hands over to the still, labels arrive, the element is
+  removed, no horizontal overflow, no `data-hq` anywhere, no console errors and
+  no 4xx.
+- Reduced motion and `?intro=off`: zero loader requests, labels present.
+- Booking confirm intact: 32 date teeth, `#smileSequence`, `#confirmBtn`, and
+  both clips wired to the re-encoded files.
+- The intro's fetch now starts at ~400ms instead of at parse time. A 292KB file
+  starting 300ms later still arrives far sooner than a 2.8MB one starting early.
+
+### Still open — unchanged
+Client copy (14 interim strings + `contact.info.mapPlaceholder`), blog prose,
+Supabase provisioning, +961 confirmation, a real domain.
+
+One carried forward from this session's reading: `backend/README.md:65` tells
+the next person to replace `SITE-DOMAIN-TBD` in the notify function, but
+`set-domain.mjs` already rewrote it to `booking@joshrhousary.github.io` — an
+address Resend can never verify. Fix when the real domain lands.

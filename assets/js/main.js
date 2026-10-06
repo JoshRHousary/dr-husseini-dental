@@ -156,18 +156,25 @@ const INTRO = {
   REPLAY_EVERY_PAGE: false
 };
 
-/* Pick the encode to fetch. Same frames and timing either way — only the file
-   size differs, so this does not break "identical on every page". */
-function chooseIntroEncode(video) {
-  const hq = video.getAttribute("data-hq");
-  if (!hq) return;
-  if (window.innerWidth < 1200) return;
+/* Is this connection one we should not spend on decoration? Lives here because
+   main.js loads before every other script on every page; mouth-transition.js
+   calls it for the same judgement about the menu clips.
+
+   chooseIntroEncode() used to sit here, picking between a 720p and a 1080p
+   loader above 1200px. It is gone, and so is the second encode:
+     - it ran at DOMContentLoaded, long after preload="auto" had already
+       fetched the 720p file, so desktop downloaded BOTH and watched one. A
+       first visit cost 9.41MB.
+     - the two files were never two sizes of one render. They were separate
+       Kling submissions - SSIM 0.871 between them, visibly different timing -
+       so the intro changed depending on how wide your window happened to be.
+   One encode now, from one master, 292KB, same animation at every width. */
+function thinPipe() {
   const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (c && (c.saveData || /^(slow-)?2g$|^3g$/.test(c.effectiveType || ""))) return;
-  const source = video.querySelector("source");
-  if (source) source.setAttribute("src", hq); else video.src = hq;
-  video.load();
+  if (!c) return false;
+  return !!c.saveData || /^(slow-)?2g$|^3g$/.test(c.effectiveType || "");
 }
+window.DH_NET = { thin: thinPipe };
 
 function initStageIntro() {
   const stage = document.getElementById("mouthStage");
@@ -185,7 +192,10 @@ function initStageIntro() {
   }
 
   // No intro: the stage is simply the open mouth, and the labels are just there.
-  if (!video || reduce || skip || (seen && !INTRO.REPLAY_EVERY_PAGE)) {
+  // thinPipe() is in this list rather than only downgrading the file, which is
+  // what the old code did: a save-data visitor still paid for the whole clip
+  // before it decided they could not afford the bigger one.
+  if (!video || reduce || skip || thinPipe() || (seen && !INTRO.REPLAY_EVERY_PAGE)) {
     if (video) video.remove();
     showLabels();
     return;
@@ -193,7 +203,12 @@ function initStageIntro() {
 
   try { sessionStorage.setItem("dh_intro", "1"); } catch (e) { /* ignore */ }
   stage.classList.add("labels-pending");
-  chooseIntroEncode(video);
+
+  /* The markup says preload="none", so nothing has been requested yet and the
+     six paths above cost zero bytes. This is the one place that decides to
+     spend them. */
+  video.preload = "auto";
+  video.load();
 
   let finished = false;
   function finish() {

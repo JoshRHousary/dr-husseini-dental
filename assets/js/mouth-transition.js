@@ -38,9 +38,12 @@
 
   function el(id) { return document.getElementById(id); }
 
-  /* Same test chooseIntroEncode() uses for the 1080p loader: do not spend a
-     Lebanese mobile connection's budget on decoration. */
+  /* Do not spend a Lebanese mobile connection's budget on decoration. The test
+     lives in main.js, which loads first on every page, so the intro and the
+     menu clips cannot drift apart on what counts as a thin pipe. The local
+     copy stands in if main.js somehow did not run. */
   function thinPipe() {
+    if (window.DH_NET && window.DH_NET.thin) return window.DH_NET.thin();
     var c = navigator.connection;
     if (!c) return false;
     return !!c.saveData || /^(slow-)?2g$|^3g$/.test(c.effectiveType || "");
