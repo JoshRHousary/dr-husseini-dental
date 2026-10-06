@@ -495,3 +495,73 @@ this session.
 - The booking confirm sequence is intact: 32 date teeth, `playConfirmSequence`
   present, `#smileSequence` untouched.
 - Frames in `preview/verify/tr-*.png`.
+
+## Session 2026-10-06 (later) — the phone layout, end to end
+
+The desktop design was never the problem; the phone was. On a 390x844 screen
+the site gave away its first screenful before a patient read a word. Six fixes,
+all in `style.css`, all inside `max-width: 900px` / `700px` blocks except one
+base rule, so desktop is untouched (re-swept at 1440x900, identical).
+
+### The sticky header was 163px — a fifth of the screen, permanently
+`.nav-row` and `.nav-actions` had **no base rule at all** — the same gap that
+had lost `.whatsapp-float` and the header's `z-index`. They fell back to
+`display: block`, so the brand, the nav and the actions each took a full line.
+Invisible on desktop, where only the brand shows and the menu lives on the
+teeth. Given a flex row, plus dropping the tagline under 700px: **163px → 61px.**
+
+### `padding: 8px 0` on an element that is also `.container`
+Two rules (the pre-existing one at the 900px breakpoint, and the one written
+earlier this session) set the header row's padding with the two-value
+shorthand. The row is `class="container nav-row"`, and `.container`'s whole job
+is the `0 24px` page gutter — the shorthand zeroed it. The brand sat hard
+against the left edge and the FR pill ran off the right. Both are now
+`padding-block`. Measured after: `24 + 166 (brand) + 6 + 170 (actions) + 24 =
+390`, exact fit, name not ellipsised.
+
+To make that fit: language pills go 40x44 under 700px (the full 44 is kept in
+the direction the thumb travels down the row), brand 15px, and the header's own
+`Book on WhatsApp` button is hidden — the float is the mobile CTA, and two of
+them is one too many.
+
+### The intro clip played as a pink blur with no teeth in it
+`.mouth-stage-video` carries a banner saying it and `.mouth-stage-img` must
+resolve their box the same way at every breakpoint — "that identity is the
+entire fix". At ≤900px they had drifted: the still goes `position: static;
+height: 42vh`, the clip stayed `inset: 0` on a `.mouth-stage` as tall as the
+whole page (3866px on the home page). `object-fit: cover` then scaled the frame
+about 11x, so the loader — the first thing a patient sees — was a cream-to-pink
+gradient. Pinned to `inset: 0 0 auto 0; height: 42vh`. Verified both boxes read
+`[61, 354]` at 700/1500/3500ms.
+
+### Also
+- The float is a 56px icon circle on phones; the ~195px pill was sitting on top
+  of the hero's own two CTAs. Its visible text is now `display: none`, so every
+  page got `aria-label` + `data-i18n-aria="common.whatsapp"`
+  (`tools/patch-wa-label.mjs`) — otherwise the primary CTA has no accessible
+  name at all. RTL flips it to `left: 16px`; verified, `dir="rtl"`, left=16.
+- Form fields: `body .field input` etc. The unprefixed rule tied with
+  booking.html's own `<style>`, which is parsed later and won on source order,
+  so the fields stayed 14.5px — which is exactly what makes iOS Safari zoom the
+  page on focus. Now 16px, `min-height: 48px`. Same source-order bug as the
+  page-local grids.
+- `.month-stepper`'s flex row lived in a `min-width: 901px` block, so on a phone
+  the arrows and the month label stacked.
+- 12.5px type (`.field > span`, `.info-row .label`, `.hero-trust .stat span`) to
+  the project's own 13px floor; `.calendar-nav-btn` and `.field select` to 44/48.
+- `.mouth-stage-img` object-position to `50% 36%` — the banner was cropped to
+  the tongue and the throat. This is a dentist; the teeth are the point.
+
+### Verification
+- `check-site.mjs`: no errors. Its specificity rule caught one of these fixes
+  honestly — `body .field > span` (0,1,2) could not beat `.hero-trust .stat
+  span` (0,2,1) — so all three selectors in that group carry `body`.
+- 6 pages x {390x844, 1440x900} x {EN, AR}: header 61px and `top: 0` (it
+  sticks), no horizontal overflow, float 56x56 fixed 16px from the corner and
+  mirrored in RTL, fields 16px, stepper one row, nav drawer links pass
+  `elementFromPoint` hit-testing, no new console errors. Frames in
+  `preview/verify/mob-*.png`, `desk-*.png`.
+- The float is `display: none` on booking by design (the page is the CTA).
+
+### Still open — unchanged
+Client copy, loader take, Supabase, blog prose, +961 confirmation, real domain.

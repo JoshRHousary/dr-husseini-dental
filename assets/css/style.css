@@ -367,6 +367,24 @@ body.home-mouth { overflow: hidden; height: 100vh; background: #F6F1E7; }
 .mouth-window .hero-art { display: none; }
 
 /* header on home: only brand + language switch float over the cream margins (menu is on the teeth) */
+/* ── Header row ──
+   .nav-row and .nav-actions had no base rule at all - the same gap that lost
+   .whatsapp-float and the header's z-index. They defaulted to display:block,
+   so the brand, the nav and the actions each took a full line. It went
+   unnoticed on desktop, where the menu lives on the teeth and only the brand
+   shows; on a phone it made the sticky header 163px tall. */
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* z-index matters here: .mouth-stage is position:relative and comes after
    the header in the DOM, so with both at z-index auto the stage painted
    over the header. On phones that put the mouth banner on top of the open
@@ -611,7 +629,9 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
   nav.primary-nav a::after { display: none; }
   nav.primary-nav a[aria-current="page"] { color: var(--primary); font-weight: 700; }
 
-  .site-header .nav-row { position: relative; gap: 10px; padding: 10px 0; }
+  /* padding-block: `padding: 10px 0` here was the rule that zeroed the
+     header's .container gutter on phones. */
+  .site-header .nav-row { position: relative; gap: 10px; padding-block: 10px; }
   .nav-actions { gap: 8px; }
 
   /* the language switch is the control that used to sit off-screen entirely */
@@ -668,11 +688,15 @@ body[dir="rtl"] .slot-summary { unicode-bidi: isolate; }
    iOS Safari zooms the whole page when a focused input is under 16px, and the
    layout does not reliably recover. */
 @media (max-width: 900px) {
-  .field input, .field select, .field textarea,
-  form.contact-form input, form.contact-form textarea {
-    font-size: 16px; padding: 12px 14px;
+  /* `body` prefix is load-bearing: booking.html declares .field input in its
+     own <style>, which is parsed after this file, so at equal specificity the
+     page won on source order and the fields stayed 14.5px - which is exactly
+     what makes iOS Safari zoom. Same order bug the page-local grids had. */
+  body .field input, body .field select, body .field textarea,
+  body form.contact-form input, body form.contact-form textarea {
+    font-size: 16px; padding: 12px 14px; min-height: 48px;
   }
-  .field textarea, form.contact-form textarea { min-height: 96px; }
+  body .field textarea, body form.contact-form textarea { min-height: 96px; }
   #confirmBtn, #fallbackWhatsapp, #contactFallback,
   form.contact-form button[type="submit"] { min-height: 48px; }
   /* booking.html sets padding:10px inline on these, giving ~38px */
@@ -1062,7 +1086,16 @@ body[dir="rtl"] .whatsapp-float { right: auto; left: 22px; }
 }
 /* matches .mouth-stage-img exactly at this breakpoint */
 @media (max-width: 900px) {
-  .mouth-stage-video { object-fit: cover; object-position: 50% 45%; }
+  /* The two boxes had drifted apart here, which is exactly what the banner
+     above warns against. On phones .mouth-stage-img goes `position: static;
+     height: 42vh`, but the clip stayed `inset: 0` on a .mouth-stage that is as
+     tall as the whole page (3866px on the home page) - so `cover` scaled the
+     frame ~11x and the intro played as a pink blur with no teeth in it. Pin
+     the clip to the top of the stage at the still's own height. */
+  .mouth-stage-video {
+    object-fit: cover; object-position: 50% 45%;
+    inset: 0 0 auto 0; height: 42vh;
+  }
 }
 .mouth-stage-video.stage-video-done { opacity: 0; }
 
@@ -1365,4 +1398,90 @@ html.dh-arriving #ptStill { opacity: 1; }
   .page-transition .pt-clip { animation: none; }
   .page-transition { display: none; }
   html.dh-arriving body { visibility: visible; }
+}
+
+
+/* ============================================================
+   ── MOBILE: making it actually usable on a phone ──
+   ============================================================ */
+@media (max-width: 900px) {
+  /* The header was 163px tall - a fifth of a 844px screen, permanently, since
+     it is sticky. The brand's name and tagline wrapped to two lines, then the
+     hamburger took a line, then the language pills took a third. One row. */
+  .site-header .nav-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    /* padding-block, not `padding: 8px 0` - the row is also .container, whose
+       `0 24px` is the page gutter. Overwriting it put the brand hard against
+       the left edge and ran the FR pill off the right. */
+    padding-block: 8px;
+    gap: 8px;
+  }
+  .site-header .nav-actions { display: flex; align-items: center; gap: 6px; }
+  .site-header .brand {
+    min-width: 0;            /* without this a flex item refuses to shrink */
+    flex: 1 1 auto;
+    line-height: 1.15;
+  }
+  .site-header .brand > span {
+    display: block;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .site-header .nav-actions { flex: 0 0 auto; }
+  .lang-switch button { min-width: 44px; min-height: 44px; padding: 6px 6px; }
+  .nav-actions .btn-primary { display: none; }   /* the float is the mobile CTA */
+
+  /* The mouth banner was cropped to the tongue and the throat. Lift it so the
+     upper arch is in frame: this is a dentist, the teeth are the point. */
+  .mouth-stage-img { object-position: 50% 36%; }
+
+  /* The float was a ~195px pill sitting on top of the hero's own CTAs. An
+     icon-only button says the same thing and covers nothing. */
+  .whatsapp-float {
+    width: 56px; height: 56px;
+    padding: 0; gap: 0;
+    justify-content: center;
+    bottom: 16px; right: 16px;
+  }
+  body[dir="rtl"] .whatsapp-float { right: auto; left: 16px; }
+  .whatsapp-float span { display: none; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+
+  /* 44px is the floor everywhere else in this file; these were 40 and 43. */
+  .calendar-nav-btn { min-width: 44px; min-height: 44px; }
+  body .field select { min-height: 48px; }
+
+  /* the month stepper's flex row lives in a min-width:901px block, so on a
+     phone the arrows and the label stacked vertically */
+  .month-stepper {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 10px;
+  }
+  .month-stepper #monthLabel {
+    flex: 1; text-align: center;
+    font-family: var(--font-display); font-size: 19px;
+  }
+
+  /* The project's own floor is 13px; these three sat at 12.5. Every selector
+     carries `body` so it outranks both the page-local copies (booking.html,
+     contact.html, parsed later) and the base `.hero-trust .stat span`, which
+     at (0,2,1) beat an unprefixed (0,1,2) mobile rule. */
+  body .field > span,
+  body .info-row .label,
+  body .hero-trust .stat span { font-size: 13px; }
+}
+
+@media (max-width: 700px) {
+  /* The tagline is the first thing to go: it is in the hero, the footer and
+     the <title> already, and dropping it is what gets the header to one line
+     on a 390px screen. */
+  .site-header .brand small { display: none; }
+  .site-header .brand { font-size: 15px; }
+  /* 390px minus the 48px gutter and the 44px toggle leaves ~160px for the
+     name, and three 44px language pills do not fit beside it. 40x44 keeps the
+     full 44px in the direction the thumb travels down the row and keeps all
+     three languages visible without a second line. */
+  .lang-switch button { min-width: 40px; padding: 6px 4px; }
+  .site-header .nav-row { gap: 6px; }
 }
